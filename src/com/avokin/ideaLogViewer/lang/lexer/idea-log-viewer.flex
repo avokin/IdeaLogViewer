@@ -82,7 +82,7 @@ TIME_STAMP      = [0-9\-:, ]+ \[[ \t]*\d+\]
   "WARN"                      { return LOG_LEVEL_WARN; }
   "ERROR"                     { return LOG_LEVEL_ERROR; }
 
-  " - "                       { pushStateAndBegin(YY_CLASS_NAME);
+  " -"[ ]+                    { pushStateAndBegin(YY_CLASS_NAME);
                                return TEXT; }
 }
 

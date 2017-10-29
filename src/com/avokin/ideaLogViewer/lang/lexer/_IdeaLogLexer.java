@@ -111,7 +111,7 @@ public class _IdeaLogLexer implements FlexLexer {
     "\0\0\0\27\0\56\0\105\0\134\0\163\0\212\0\241"+
     "\0\270\0\134\0\317\0\346\0\375\0\u0114\0\u012b\0\u0142"+
     "\0\163\0\u0159\0\u0170\0\u0187\0\u019e\0\u01b5\0\u01cc\0\u01e3"+
-    "\0\u01fa\0\134\0\134\0\u0211\0\u0228\0\u023f\0\u0256\0\134"+
+    "\0\u01fa\0\134\0\u0187\0\u0211\0\u0228\0\u023f\0\u0256\0\134"+
     "\0\u026d\0\u0284\0\134\0\134\0\134\0\134";
 
   private static int [] zzUnpackRowMap() {
@@ -192,8 +192,8 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\1\11\4\1\1\11\6\1\11\0\2\11\4\0"+
-    "\1\11\2\0\4\11";
+    "\4\0\1\11\4\1\1\11\6\1\11\0\1\11\1\1"+
+    "\4\0\1\11\2\0\4\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[38];
