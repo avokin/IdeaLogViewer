@@ -1,5 +1,6 @@
 package com.avokin.ideaLogViewer.lang.psi;
 
+import com.avokin.ideaLogViewer.lang.IdeaLogLanguage;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

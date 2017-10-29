@@ -1,5 +1,6 @@
 package com.avokin.ideaLogViewer.lang.psi;
 
+import com.avokin.ideaLogViewer.lang.IdeaLogLanguage;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 

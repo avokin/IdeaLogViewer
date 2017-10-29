@@ -1,4 +1,4 @@
-package com.avokin.ideaLogViewer.lang.psi;
+package com.avokin.ideaLogViewer.lang;
 
 import com.intellij.lang.Language;
 
