@@ -10,9 +10,14 @@
   <idea-version since-build="173.0"/>
 
   <extensions defaultExtensionNs="com.intellij">
-    <lang.parserDefinition language="IDEA log" implementationClass="com.avokin.ideaLogViewer.lang.parser.IdeaLogParserDefinition"/>
-    <schemeExporter schemeClass="com.avokin.ideaLogViewer.lang.psi.IdeaLogFileType"/>
     <fileTypeFactory implementation="com.avokin.ideaLogViewer.lang.psi.IdeaLogFileTypeFactory"/>
     <syntaxHighlighter key="IDEA log" implementationClass="com.avokin.ideaLogViewer.IdeaLogSyntaxHighlighter"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij.lang">
+    <parserDefinition language="IDEA log"
+                      implementationClass="com.avokin.ideaLogViewer.lang.parser.IdeaLogParserDefinition"/>
+    <psiStructureViewFactory language="IDEA log"
+                             implementationClass="com.avokin.ideaLogViewer.structureView.IdeaLogStructureViewFactory"/>
   </extensions>
 </idea-plugin>
