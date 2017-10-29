@@ -3,17 +3,15 @@ package com.avokin.ideaLogViewer.lang.parser;
 import com.avokin.ideaLogViewer.lang.lexer.IdeaLogLexer;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogFile;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.OwnBufferLeafPsiElement;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
@@ -26,14 +24,7 @@ public class IdeaLogParserDefinition implements ParserDefinition {
   }
 
   public PsiParser createParser(Project project) {
-    return (IElementType root, PsiBuilder builder) -> {
-      PsiBuilder.Marker marker = builder.mark();
-      while (builder.getTokenType() != null) {
-        builder.advanceLexer();
-      }
-      marker.done(root);
-      return builder.getTreeBuilt();
-    };
+    return new IdeaLogParser();
   }
 
   @Override
@@ -56,7 +47,7 @@ public class IdeaLogParserDefinition implements ParserDefinition {
   @NotNull
   @Override
   public PsiElement createElement(ASTNode node) {
-    return new OwnBufferLeafPsiElement(node.getElementType(), node.getText());
+    return new ASTWrapperPsiElement(node);
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.avokin.ideaLogViewer.log.viewer.lang.lexer;
+package com.avokin.ideaLogViewer.lang.lexer;
 
 
 import com.intellij.lexer.FlexLexer;
@@ -9,8 +9,7 @@ import java.util.Stack;
 
 import com.intellij.psi.TokenType;
 
-import com.avokin.ideaLogViewer.log.viewer.lang.psi.IdeaLogViewerTokenTypes;
-import static com.avokin.ideaLogViewer.log.viewer.lang.psi.IdeaLogViewerTokenTypes.*;
+import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
 /**
  * The IdeaLogViewer lexer
@@ -66,20 +65,25 @@ import static com.avokin.ideaLogViewer.log.viewer.lang.psi.IdeaLogViewerTokenTyp
 WHITE_SPACE     = ([ \f\n\r\t\u000b​\u00a0\u1680​\u180e\u2000-\u200a​\u2028\u2029​​\u202f\u205f​\u3000])+
 TIME_STAMP      = [0-9\-:, ]+ \[[ \t]*\d+\]
 
-%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME
+%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD
 
 %%
 
 <YYINITIAL> {
+  {TIME_STAMP}                { pushStateAndBegin(YY_LOG_RECORD);
+                                return TIME_STAMP; }
+}
+
+<YY_LOG_RECORD> {
+  {WHITE_SPACE}               { return TokenType.WHITE_SPACE; }
+
   "DEBUG"                     { return LOG_LEVEL_DEBUG; }
   "INFO"                      { return LOG_LEVEL_INFO; }
   "WARN"                      { return LOG_LEVEL_WARN; }
   "ERROR"                     { return LOG_LEVEL_ERROR; }
 
   " - "                       { pushStateAndBegin(YY_CLASS_NAME);
-                                return TEXT; }
-
-  {TIME_STAMP}                { return TIME_STAMP; }
+                               return TEXT; }
 }
 
 <YY_CLASS_NAME> {
@@ -91,14 +95,12 @@ TIME_STAMP      = [0-9\-:, ]+ \[[ \t]*\d+\]
 
 <YY_AFTER_CLASS_NAME> {
   [^\n]+                      { return MESSAGE; }
+
+  [\n]                          { stack.clear();
+                                  pushStateAndBegin(YYINITIAL);
+                                  return TokenType.WHITE_SPACE; }
 }
 
-
-[\n]                          { stack.clear();
-                                pushStateAndBegin(YYINITIAL);
-                                return TokenType.WHITE_SPACE; }
-
-{WHITE_SPACE}                 { return TokenType.WHITE_SPACE; }
 
 [^]                           { stack.clear();
                                 pushStateAndBegin(YYINITIAL);

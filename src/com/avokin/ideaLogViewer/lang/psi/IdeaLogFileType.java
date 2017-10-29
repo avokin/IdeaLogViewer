@@ -36,9 +36,4 @@ public class IdeaLogFileType extends LanguageFileType {
     public Icon getIcon() {
         return null;
     }
-
-    @Override
-    public boolean isReadOnly() {
-        return true;
-    }
 }

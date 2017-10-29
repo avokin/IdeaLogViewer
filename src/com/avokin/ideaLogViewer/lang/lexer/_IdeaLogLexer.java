@@ -29,6 +29,7 @@ public class _IdeaLogLexer implements FlexLexer {
   public static final int YYINITIAL = 0;
   public static final int YY_CLASS_NAME = 2;
   public static final int YY_AFTER_CLASS_NAME = 4;
+  public static final int YY_LOG_RECORD = 6;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -37,7 +38,7 @@ public class _IdeaLogLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2, 2
+     0,  0,  1,  1,  2,  2,  3, 3
   };
 
   /** 
@@ -77,12 +78,12 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\3\0\1\1\1\2\1\1\1\2\4\1\1\3\2\4"+
-    "\1\2\2\5\2\0\1\2\7\0\1\6\4\0\1\7"+
-    "\1\10\2\0\1\11\1\12\1\13\1\14";
+    "\4\0\2\1\1\2\1\1\1\3\1\4\2\5\4\1"+
+    "\11\0\1\6\1\7\4\0\1\10\2\0\1\11\1\12"+
+    "\1\13\1\14";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[40];
+    int [] result = new int[38];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -108,13 +109,13 @@ public class _IdeaLogLexer implements FlexLexer {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\27\0\56\0\105\0\134\0\163\0\212\0\241"+
-    "\0\270\0\317\0\346\0\134\0\375\0\u0114\0\u012b\0\u0142"+
-    "\0\u0159\0\163\0\u0170\0\u0187\0\u019e\0\u01b5\0\u01cc\0\u01e3"+
-    "\0\u01fa\0\u0211\0\u0228\0\163\0\u023f\0\u0256\0\u026d\0\u0284"+
-    "\0\105\0\105\0\u029b\0\u02b2\0\105\0\105\0\105\0\105";
+    "\0\270\0\134\0\317\0\346\0\375\0\u0114\0\u012b\0\u0142"+
+    "\0\163\0\u0159\0\u0170\0\u0187\0\u019e\0\u01b5\0\u01cc\0\u01e3"+
+    "\0\u01fa\0\134\0\134\0\u0211\0\u0228\0\u023f\0\u0256\0\134"+
+    "\0\u026d\0\u0284\0\134\0\134\0\134\0\134";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[40];
+    int [] result = new int[38];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -137,29 +138,23 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\4\1\5\1\6\1\7\1\4\1\5\1\4\1\6"+
-    "\1\4\1\10\1\11\3\4\1\12\3\4\1\13\2\4"+
-    "\1\6\1\14\1\15\1\16\1\15\1\17\1\15\1\5"+
-    "\17\15\1\4\1\14\1\20\1\21\1\20\1\21\1\20"+
-    "\1\21\20\20\1\14\30\0\1\5\1\0\1\5\1\0"+
-    "\1\5\20\0\1\5\2\0\2\22\1\23\2\0\1\22"+
-    "\15\0\1\22\2\0\1\5\1\22\1\24\1\23\1\5"+
-    "\1\0\1\22\15\0\1\25\1\5\12\0\1\26\40\0"+
-    "\1\27\21\0\1\30\32\0\1\31\3\0\3\15\1\0"+
-    "\1\15\1\0\17\15\2\0\1\15\1\16\1\15\1\5"+
-    "\1\15\1\5\17\15\1\0\1\5\1\0\1\5\1\0"+
-    "\1\5\1\0\1\5\17\0\1\32\1\5\26\20\1\0"+
-    "\1\20\1\21\1\20\1\21\1\20\1\21\20\20\1\5"+
-    "\3\0\1\23\1\0\1\23\2\33\20\0\1\5\1\22"+
-    "\1\24\1\23\1\5\1\0\1\22\15\0\1\22\1\5"+
-    "\2\0\1\22\1\34\1\23\2\0\1\22\15\0\1\22"+
-    "\14\0\1\35\37\0\1\36\22\0\1\37\32\0\1\40"+
-    "\5\0\1\41\31\0\2\33\1\42\32\0\1\43\33\0"+
-    "\1\44\26\0\1\45\24\0\1\46\24\0\1\47\35\0"+
-    "\1\50\2\0";
+    "\2\5\2\6\3\5\1\6\15\5\1\6\1\5\3\7"+
+    "\1\10\1\7\1\5\17\7\2\5\26\11\1\12\1\5"+
+    "\1\13\1\5\1\14\1\5\1\13\3\5\1\15\1\16"+
+    "\3\5\1\17\3\5\1\20\3\5\1\13\31\0\2\21"+
+    "\1\22\2\0\1\21\15\0\1\21\1\0\3\7\1\0"+
+    "\1\7\1\0\17\7\27\0\1\23\1\0\26\11\2\0"+
+    "\1\13\1\0\1\13\1\0\1\13\20\0\1\13\1\0"+
+    "\1\13\1\0\1\13\1\0\1\13\17\0\1\24\1\13"+
+    "\12\0\1\25\40\0\1\26\21\0\1\27\32\0\1\30"+
+    "\6\0\1\22\1\0\1\22\2\31\22\0\1\32\26\0"+
+    "\1\33\36\0\1\34\37\0\1\35\22\0\1\36\32\0"+
+    "\1\37\10\0\2\31\1\40\32\0\1\41\33\0\1\42"+
+    "\26\0\1\43\24\0\1\44\24\0\1\45\35\0\1\46"+
+    "\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[713];
+    int [] result = new int[667];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -197,11 +192,11 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\3\0\1\11\15\1\2\0\1\1\7\0\1\1\4\0"+
-    "\2\11\2\0\4\11";
+    "\4\0\1\11\4\1\1\11\6\1\11\0\2\11\4\0"+
+    "\1\11\2\0\4\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[40];
+    int [] result = new int[38];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -541,35 +536,36 @@ public class _IdeaLogLexer implements FlexLexer {
             }
           case 13: break;
           case 2: 
-            { return TokenType.WHITE_SPACE;
+            { return CLASS_NAME;
             }
           case 14: break;
           case 3: 
-            { stack.clear();
-                                pushStateAndBegin(YYINITIAL);
-                                return TokenType.WHITE_SPACE;
+            { return MESSAGE;
             }
           case 15: break;
           case 4: 
-            { return CLASS_NAME;
+            { stack.clear();
+                                  pushStateAndBegin(YYINITIAL);
+                                  return TokenType.WHITE_SPACE;
             }
           case 16: break;
           case 5: 
-            { return MESSAGE;
+            { return TokenType.WHITE_SPACE;
             }
           case 17: break;
           case 6: 
-            { pushStateAndBegin(YY_CLASS_NAME);
+            { pushStateAndBegin(YY_AFTER_CLASS_NAME);
                                 return TEXT;
             }
           case 18: break;
           case 7: 
-            { pushStateAndBegin(YY_AFTER_CLASS_NAME);
-                                return TEXT;
+            { pushStateAndBegin(YY_CLASS_NAME);
+                               return TEXT;
             }
           case 19: break;
           case 8: 
-            { return TIME_STAMP;
+            { pushStateAndBegin(YY_LOG_RECORD);
+                                return TIME_STAMP;
             }
           case 20: break;
           case 9: 
