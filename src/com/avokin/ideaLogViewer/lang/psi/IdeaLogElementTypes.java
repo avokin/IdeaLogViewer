@@ -8,4 +8,5 @@ public interface IdeaLogElementTypes {
     IFileElementType IDEA_LOG_FILE = new IFileElementType("IdeaLogFile", IdeaLogLanguage.INSTANCE);
 
     IElementType LOG_RECORD = new IElementType("LOG_RECORD", IdeaLogLanguage.INSTANCE);
+    IElementType IDE_STARTED_RECORD = new IElementType("IDE_STARTED_RECORD", IdeaLogLanguage.INSTANCE);
 }
