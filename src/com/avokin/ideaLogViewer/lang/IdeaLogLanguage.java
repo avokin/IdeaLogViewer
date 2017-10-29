@@ -5,7 +5,7 @@ import com.intellij.lang.Language;
 public class IdeaLogLanguage extends Language {
   public static final IdeaLogLanguage INSTANCE = new IdeaLogLanguage();
 
-  protected IdeaLogLanguage() {
+  private IdeaLogLanguage() {
     super("IDEA log");
   }
 }
