@@ -14,6 +14,6 @@ public class IdeaLogFile extends PsiFileBase {
     @NotNull
     @Override
     public FileType getFileType() {
-        return com.avokin.ideaLogViewer.lang.psi.IdeaLogFileType.INSTANCE;
+        return IdeaLogFileType.INSTANCE;
     }
 }

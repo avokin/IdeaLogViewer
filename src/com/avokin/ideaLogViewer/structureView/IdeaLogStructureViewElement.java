@@ -1,21 +1,20 @@
 package com.avokin.ideaLogViewer.structureView;
 
+import com.avokin.ideaLogViewer.IdeaLogItemPresentation;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogRecord;
 import com.intellij.ide.structureView.StructureViewTreeElement;
-import com.intellij.ide.util.treeView.NodeDescriptorProvidingKey;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
-public class IdeaLogStructureViewElement implements StructureViewTreeElement, ItemPresentation, NodeDescriptorProvidingKey {
+public class IdeaLogStructureViewElement implements StructureViewTreeElement {
     private IdeaLogRecord myElement;
+    private String myPresentableText;
 
-    IdeaLogStructureViewElement(IdeaLogRecord ideaLogRecord) {
+    IdeaLogStructureViewElement(@NotNull IdeaLogRecord ideaLogRecord, @NotNull String text) {
         myElement = ideaLogRecord;
+        myPresentableText = text;
     }
 
     @Override
@@ -25,38 +24,14 @@ public class IdeaLogStructureViewElement implements StructureViewTreeElement, It
 
     @NotNull
     @Override
-    public Object getKey() {
-        return getPresentableText();
-    }
-
-    @NotNull
-    @Override
     public ItemPresentation getPresentation() {
-        return this;
+        return new IdeaLogItemPresentation(myPresentableText, myElement.getIcon(0));
     }
 
     @NotNull
     @Override
     public TreeElement[] getChildren() {
-        return new TreeElement[0];
-    }
-
-    @NotNull
-    @Override
-    public String getPresentableText() {
-        return "IDE start: " + myElement.getText();
-    }
-
-    @Nullable
-    @Override
-    public String getLocationString() {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public Icon getIcon(boolean b) {
-        return null;
+        return TreeElement.EMPTY_ARRAY;
     }
 
     @Override

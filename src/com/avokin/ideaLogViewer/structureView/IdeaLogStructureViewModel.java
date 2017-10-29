@@ -1,5 +1,9 @@
 package com.avokin.ideaLogViewer.structureView;
 
+import com.avokin.ideaLogViewer.IdeaLogItemPresentation;
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogFileType;
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogIdeStartedRecord;
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogLoadedPluginsRecord;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogRecord;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
@@ -7,12 +11,11 @@ import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,25 +49,7 @@ public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel
             @NotNull
             @Override
             public ItemPresentation getPresentation() {
-                return new ItemPresentation() {
-                    @NotNull
-                    @Override
-                    public String getPresentableText() {
-                        return myIdeaLogFile.getName();
-                    }
-
-                    @Nullable
-                    @Override
-                    public String getLocationString() {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Icon getIcon(boolean b) {
-                        return null;
-                    }
-                };
+                return new IdeaLogItemPresentation(myIdeaLogFile.getName(), IdeaLogFileType.INSTANCE.getIcon());
             }
 
             @NotNull
@@ -72,8 +57,13 @@ public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel
             public TreeElement[] getChildren() {
                 List<TreeElement> result = new ArrayList<>();
                 for (PsiElement logRecord: myIdeaLogFile.getFirstChild().getChildren()) {
-                    if (logRecord instanceof IdeaLogRecord) {
-                        result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord));
+                    if (logRecord instanceof IdeaLogIdeStartedRecord) {
+                      String presentableText = "IDE Started: " + StringUtil.shortenTextWithEllipsis(logRecord.getText(), 30, 0);
+                      result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord, presentableText));
+                    }
+                    if (logRecord instanceof IdeaLogLoadedPluginsRecord) {
+                        String presentableText = "Loaded bundled plugins";
+                        result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord, presentableText));
                     }
                 }
                 return result.toArray(new TreeElement[result.size()]);

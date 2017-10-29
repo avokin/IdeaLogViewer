@@ -6,13 +6,13 @@ import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes.IDE_STARTED_RECORD;
-import static com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes.LOG_RECORD;
+import static com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes.*;
 import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.MESSAGE;
 import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.TIME_STAMP;
 
 public class IdeaLogParser implements PsiParser {
     private static final String IDE_STARTED_MESSAGE = "------------------------------------------------------ IDE STARTED ------------------------------------------------------";
+    private static final String LOADED_PLUGINS_PREFIX = "Loaded bundled plugins:";
 
     @NotNull
     @Override
@@ -32,16 +32,22 @@ public class IdeaLogParser implements PsiParser {
         return builder.getTreeBuilt();
     }
 
-    private void parseLogRecord(@NotNull PsiBuilder builder) {
-        boolean isIdeStartedRecord = false;
+    private static void parseLogRecord(@NotNull PsiBuilder builder) {
+        IElementType recordElementType = LOG_RECORD;
         PsiBuilder.Marker logRecordMarker = builder.mark();
         builder.advanceLexer();
         while (builder.getTokenType() != null && builder.getTokenType() != TIME_STAMP) {
-            if (builder.getTokenType() == MESSAGE && IDE_STARTED_MESSAGE.equals(builder.getTokenText())) {
-                isIdeStartedRecord = true;
+            String tokenText = builder.getTokenText();
+            if (builder.getTokenType() == MESSAGE && tokenText != null) {
+                if (IDE_STARTED_MESSAGE.equals(tokenText)) {
+                    recordElementType = IDE_STARTED_RECORD;
+                }
+                if (tokenText.startsWith(LOADED_PLUGINS_PREFIX)) {
+                    recordElementType = LOADED_PLUGINS_RECORD;
+                }
             }
             builder.advanceLexer();
         }
-        logRecordMarker.done(isIdeStartedRecord ? IDE_STARTED_RECORD : LOG_RECORD);
+        logRecordMarker.done(recordElementType);
     }
 }

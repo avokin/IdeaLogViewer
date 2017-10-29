@@ -1,10 +1,7 @@
 package com.avokin.ideaLogViewer.lang.parser;
 
 import com.avokin.ideaLogViewer.lang.lexer.IdeaLogLexer;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogFile;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogIdeStartedRecord;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogRecord;
+import com.avokin.ideaLogViewer.lang.psi.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -54,6 +51,9 @@ public class IdeaLogParserDefinition implements ParserDefinition {
     }
     if (node.getElementType() == IdeaLogElementTypes.IDE_STARTED_RECORD) {
       return new IdeaLogIdeStartedRecord(node);
+    }
+    if (node.getElementType() == IdeaLogElementTypes.LOADED_PLUGINS_RECORD) {
+      return new IdeaLogLoadedPluginsRecord(node);
     }
     return new ASTWrapperPsiElement(node);
   }

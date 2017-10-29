@@ -1,23 +1,23 @@
 <idea-plugin>
-  <id>IdeaLogViewer</id>
-  <name>Viewer for idea.log files</name>
-  <description>
-    Highlighting and Structure View for idea.log files
-  </description>
-  <version>0.1</version>
-  <vendor>Andrey Vokin</vendor>
-  <category>Log</category>
-  <idea-version since-build="173.0"/>
+    <id>IdeaLogViewer</id>
+    <name>Viewer for idea.log files</name>
+    <description>
+        Highlighting and Structure View for idea.log files
+    </description>
+    <version>0.1</version>
+    <vendor>Andrey Vokin</vendor>
+    <category>Log</category>
+    <idea-version since-build="173.0"/>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <fileTypeFactory implementation="com.avokin.ideaLogViewer.lang.psi.IdeaLogFileTypeFactory"/>
-    <syntaxHighlighter key="IDEA log" implementationClass="com.avokin.ideaLogViewer.IdeaLogSyntaxHighlighter"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory implementation="com.avokin.ideaLogViewer.lang.psi.IdeaLogFileTypeFactory"/>
+        <syntaxHighlighter key="IDEA log" implementationClass="com.avokin.ideaLogViewer.IdeaLogSyntaxHighlighter"/>
+    </extensions>
 
-  <extensions defaultExtensionNs="com.intellij.lang">
-    <parserDefinition language="IDEA log"
-                      implementationClass="com.avokin.ideaLogViewer.lang.parser.IdeaLogParserDefinition"/>
-    <psiStructureViewFactory language="IDEA log"
-                             implementationClass="com.avokin.ideaLogViewer.structureView.IdeaLogStructureViewFactory"/>
-  </extensions>
+    <extensions defaultExtensionNs="com.intellij.lang">
+        <parserDefinition language="IDEA log"
+                          implementationClass="com.avokin.ideaLogViewer.lang.parser.IdeaLogParserDefinition"/>
+        <psiStructureViewFactory language="IDEA log"
+                                 implementationClass="com.avokin.ideaLogViewer.structureView.IdeaLogStructureViewFactory"/>
+    </extensions>
 </idea-plugin>
