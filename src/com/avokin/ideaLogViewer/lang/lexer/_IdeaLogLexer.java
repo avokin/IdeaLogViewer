@@ -4,10 +4,10 @@ package com.avokin.ideaLogViewer.lang.lexer;
 
 
 import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-
 import java.util.Stack;
+
+import com.intellij.psi.TokenType;
 
 import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
@@ -30,6 +30,7 @@ public class _IdeaLogLexer implements FlexLexer {
   public static final int YY_CLASS_NAME = 2;
   public static final int YY_AFTER_CLASS_NAME = 4;
   public static final int YY_LOG_RECORD = 6;
+  public static final int YY_UPTIME = 8;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -38,7 +39,7 @@ public class _IdeaLogLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  3, 3
+     0,  0,  1,  1,  2,  2,  3,  3,  4, 4
   };
 
   /** 
@@ -67,10 +68,10 @@ public class _IdeaLogLexer implements FlexLexer {
 
   /* The ZZ_CMAP_A table has 512 entries */
   static final char ZZ_CMAP_A[] = zzUnpackCMap(
-    "\11\0\1\5\1\26\3\1\22\0\1\3\13\0\1\2\1\25\2\0\12\7\1\2\6\0\1\23\1\13\1\0\1"+
+    "\11\0\1\4\1\26\3\1\22\0\1\3\13\0\1\2\1\25\2\0\12\6\1\2\6\0\1\23\1\13\1\0\1"+
     "\11\1\12\1\20\1\15\1\0\1\16\4\0\1\17\1\21\2\0\1\24\2\0\1\14\1\0\1\22\3\0\1"+
-    "\4\1\0\1\10\42\0\1\1\37\0\12\6\46\0\12\6\14\0\12\6\36\0\1\1\1\0\12\6\6\0\12"+
-    "\6\6\0\12\6\6\0\14\1\34\0\2\1\5\0\1\1\57\0\1\1\26\0\12\6\16\0\62\6");
+    "\7\1\0\1\10\42\0\1\1\37\0\12\5\46\0\12\5\14\0\12\5\36\0\1\1\1\0\12\5\6\0\12"+
+    "\5\6\0\12\5\6\0\14\1\34\0\2\1\5\0\1\1\57\0\1\1\26\0\12\5\16\0\62\5");
 
   /** 
    * Translates DFA states to action switch labels.
@@ -78,12 +79,12 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\4\0\2\1\1\2\1\1\1\3\1\4\2\5\4\1"+
-    "\11\0\1\6\1\7\4\0\1\10\2\0\1\11\1\12"+
-    "\1\13\1\14";
+    "\5\0\1\1\1\2\1\3\1\1\1\4\1\5\2\6"+
+    "\4\1\1\6\1\7\1\10\1\11\6\0\1\12\1\13"+
+    "\6\0\1\14\1\15\1\16\1\17";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[38];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -109,13 +110,13 @@ public class _IdeaLogLexer implements FlexLexer {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\27\0\56\0\105\0\134\0\163\0\212\0\241"+
-    "\0\270\0\134\0\317\0\346\0\375\0\u0114\0\u012b\0\u0142"+
-    "\0\163\0\u0159\0\u0170\0\u0187\0\u019e\0\u01b5\0\u01cc\0\u01e3"+
-    "\0\u01fa\0\134\0\u0187\0\u0211\0\u0228\0\u023f\0\u0256\0\134"+
-    "\0\u026d\0\u0284\0\134\0\134\0\134\0\134";
+    "\0\270\0\317\0\163\0\346\0\375\0\u0114\0\u012b\0\u0142"+
+    "\0\u0159\0\u0170\0\u0187\0\163\0\163\0\u019e\0\u01b5\0\u01cc"+
+    "\0\u01e3\0\u01fa\0\u0211\0\163\0\u01b5\0\u0228\0\u023f\0\u0256"+
+    "\0\u026d\0\u0284\0\u029b\0\163\0\163\0\163\0\163";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[38];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -138,23 +139,23 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\2\5\2\6\3\5\1\6\15\5\1\6\1\5\3\7"+
-    "\1\10\1\7\1\5\17\7\2\5\26\11\1\12\1\5"+
-    "\1\13\1\5\1\14\1\5\1\13\3\5\1\15\1\16"+
-    "\3\5\1\17\3\5\1\20\3\5\1\13\31\0\2\21"+
-    "\1\22\2\0\1\21\15\0\1\21\1\0\3\7\1\0"+
-    "\1\7\1\0\17\7\27\0\1\23\1\0\26\11\2\0"+
-    "\1\13\1\0\1\13\1\0\1\13\20\0\1\13\1\0"+
-    "\1\13\1\0\1\13\1\0\1\13\17\0\1\24\1\13"+
-    "\12\0\1\25\40\0\1\26\21\0\1\27\32\0\1\30"+
-    "\6\0\1\22\1\0\1\22\2\31\22\0\1\32\26\0"+
-    "\1\33\36\0\1\34\37\0\1\35\22\0\1\36\32\0"+
-    "\1\37\10\0\2\31\1\40\32\0\1\41\33\0\1\42"+
-    "\26\0\1\43\24\0\1\44\24\0\1\45\35\0\1\46"+
-    "\2\0";
+    "\2\6\2\7\2\6\1\7\16\6\1\7\1\6\3\10"+
+    "\1\11\1\6\20\10\2\6\26\12\1\13\1\6\1\14"+
+    "\1\6\1\15\1\14\4\6\1\16\1\17\3\6\1\20"+
+    "\3\6\1\21\3\6\1\14\1\6\1\14\1\6\2\22"+
+    "\2\23\1\24\1\25\15\6\1\14\31\0\2\7\2\0"+
+    "\1\7\16\0\1\7\1\0\3\10\2\0\20\10\27\0"+
+    "\1\26\1\0\26\12\2\0\1\14\1\0\2\14\21\0"+
+    "\1\14\1\0\1\14\1\0\2\14\20\0\1\27\1\14"+
+    "\12\0\1\30\40\0\1\31\21\0\1\32\32\0\1\33"+
+    "\4\0\1\14\1\0\2\22\2\23\17\0\1\14\5\0"+
+    "\2\23\23\0\1\34\26\0\1\35\36\0\1\36\37\0"+
+    "\1\37\22\0\1\40\32\0\1\41\16\0\1\42\33\0"+
+    "\1\43\26\0\1\44\24\0\1\45\24\0\1\46\35\0"+
+    "\1\47\2\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[667];
+    int [] result = new int[690];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -192,11 +193,11 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\1\11\4\1\1\11\6\1\11\0\1\11\1\1"+
-    "\4\0\1\11\2\0\4\11";
+    "\5\0\1\11\4\1\1\11\10\1\2\11\6\0\1\11"+
+    "\1\1\6\0\4\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[38];
+    int [] result = new int[39];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -534,56 +535,69 @@ public class _IdeaLogLexer implements FlexLexer {
                                 pushStateAndBegin(YYINITIAL);
                                 return TEXT;
             }
-          case 13: break;
-          case 2: 
-            { return CLASS_NAME;
-            }
-          case 14: break;
-          case 3: 
-            { return MESSAGE;
-            }
-          case 15: break;
-          case 4: 
-            { stack.clear();
-                                  pushStateAndBegin(YYINITIAL);
-                                  return TokenType.WHITE_SPACE;
-            }
           case 16: break;
-          case 5: 
-            { return TokenType.WHITE_SPACE;
+          case 2: 
+            { pushStateAndBegin(YY_UPTIME);
+                                return TIME_STAMP;
             }
           case 17: break;
+          case 3: 
+            { return CLASS_NAME;
+            }
+          case 18: break;
+          case 4: 
+            { return MESSAGE;
+            }
+          case 19: break;
+          case 5: 
+            { stack.clear();
+                                pushStateAndBegin(YYINITIAL);
+                                return TokenType.WHITE_SPACE;
+            }
+          case 20: break;
           case 6: 
+            { return TokenType.WHITE_SPACE;
+            }
+          case 21: break;
+          case 7: 
+            { return UPTIME;
+            }
+          case 22: break;
+          case 8: 
+            { return BRACKET_START;
+            }
+          case 23: break;
+          case 9: 
+            { pushStateAndBegin(YY_LOG_RECORD);
+                                return BRACKET_END;
+            }
+          case 24: break;
+          case 10: 
             { pushStateAndBegin(YY_AFTER_CLASS_NAME);
                                 return TEXT;
             }
-          case 18: break;
-          case 7: 
+          case 25: break;
+          case 11: 
             { pushStateAndBegin(YY_CLASS_NAME);
                                return TEXT;
             }
-          case 19: break;
-          case 8: 
-            { pushStateAndBegin(YY_LOG_RECORD);
-                                return TIME_STAMP;
-            }
-          case 20: break;
-          case 9: 
+          case 26: break;
+          case 12: 
             { return LOG_LEVEL_INFO;
             }
-          case 21: break;
-          case 10: 
+          case 27: break;
+          case 13: 
             { return LOG_LEVEL_WARN;
             }
-          case 22: break;
-          case 11: 
+          case 28: break;
+          case 14: 
             { return LOG_LEVEL_DEBUG;
             }
-          case 23: break;
-          case 12: 
+          case 29: break;
+          case 15: 
             { return LOG_LEVEL_ERROR;
             }
-          case 24: break;
+          case 30: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

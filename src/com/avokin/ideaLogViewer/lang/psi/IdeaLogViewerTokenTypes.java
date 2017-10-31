@@ -12,4 +12,8 @@ public interface IdeaLogViewerTokenTypes {
   IElementType TEXT = new IdeaLogElementType("TEXT");
   IElementType MESSAGE = new IdeaLogElementType("MESSAGE");
   IElementType CLASS_NAME = new IdeaLogElementType("CLASS_NAME");
+
+  IElementType BRACKET_START = new IdeaLogElementType("BRACKET_START");
+  IElementType BRACKET_END = new IdeaLogElementType("BRACKET_END");
+  IElementType UPTIME = new IdeaLogElementType("UPTIME");
 }

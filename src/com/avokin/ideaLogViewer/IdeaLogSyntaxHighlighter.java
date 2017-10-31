@@ -23,9 +23,10 @@ public class IdeaLogSyntaxHighlighter extends SyntaxHighlighterBase {
         ATTRIBUTES.put(LOG_LEVEL_WARN, DefaultLanguageHighlighterColors.BRACKETS);
         ATTRIBUTES.put(LOG_LEVEL_ERROR, HighlighterColors.BAD_CHARACTER);
         ATTRIBUTES.put(TIME_STAMP, DefaultLanguageHighlighterColors.NUMBER);
-        ATTRIBUTES.put(TEXT, DefaultLanguageHighlighterColors.STRING);
-        ATTRIBUTES.put(MESSAGE, DefaultLanguageHighlighterColors.NUMBER);
+        ATTRIBUTES.put(TEXT, DefaultLanguageHighlighterColors.STATIC_FIELD);
+        ATTRIBUTES.put(MESSAGE, DefaultLanguageHighlighterColors.STRING);
         ATTRIBUTES.put(CLASS_NAME, DefaultLanguageHighlighterColors.CLASS_NAME);
+        ATTRIBUTES.put(UPTIME, DefaultLanguageHighlighterColors.NUMBER);
     }
 
     @NotNull

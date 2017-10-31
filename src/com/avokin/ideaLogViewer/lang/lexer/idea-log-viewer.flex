@@ -3,8 +3,6 @@ package com.avokin.ideaLogViewer.lang.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
 
 import com.intellij.psi.TokenType;
@@ -63,15 +61,24 @@ import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
 
 WHITE_SPACE     = ([ \f\n\r\t\u000b​\u00a0\u1680​\u180e\u2000-\u200a​\u2028\u2029​​\u202f\u205f​\u3000])+
-TIME_STAMP      = [0-9\-:, ]+ \[[ \t]*\d+\]
+TIME_STAMP      = [0-9\-:, ]+
+UPTIME          = [ \t]*\d+
 
-%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD
+%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD, YY_UPTIME
 
 %%
 
 <YYINITIAL> {
-  {TIME_STAMP}                { pushStateAndBegin(YY_LOG_RECORD);
+  {TIME_STAMP}                { pushStateAndBegin(YY_UPTIME);
                                 return TIME_STAMP; }
+}
+
+<YY_UPTIME> {
+  {WHITE_SPACE}               { return TokenType.WHITE_SPACE; }
+  "["                         { return BRACKET_START; }
+  {UPTIME}                    { return UPTIME; }
+  "]"                         { pushStateAndBegin(YY_LOG_RECORD);
+                                return BRACKET_END; }
 }
 
 <YY_LOG_RECORD> {
@@ -96,9 +103,9 @@ TIME_STAMP      = [0-9\-:, ]+ \[[ \t]*\d+\]
 <YY_AFTER_CLASS_NAME> {
   [^\n]+                      { return MESSAGE; }
 
-  [\n]                          { stack.clear();
-                                  pushStateAndBegin(YYINITIAL);
-                                  return TokenType.WHITE_SPACE; }
+  [\n]                        { stack.clear();
+                                pushStateAndBegin(YYINITIAL);
+                                return TokenType.WHITE_SPACE; }
 }
 
 
