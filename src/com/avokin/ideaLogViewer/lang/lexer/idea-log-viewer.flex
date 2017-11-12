@@ -15,7 +15,7 @@ import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
  * @author Andrey Vokin
  */
 %%
-%debug
+
 %unicode
 
 %public

@@ -24,7 +24,6 @@ public class _IdeaLogLexer implements FlexLexer {
 
   /** initial size of the lookahead buffer */
   private static final int ZZ_BUFFERSIZE = 16384;
-  private static final String ZZ_NL = System.getProperty("line.separator");
 
   /** lexical states */
   public static final int YYINITIAL = 0;
@@ -41,11 +40,11 @@ public class _IdeaLogLexer implements FlexLexer {
    *                  at the beginning of a line
    * l is of the form l = 2*k, k a non negative integer
    */
-  private static final int ZZ_LEXSTATE[] = {
+  private static final int ZZ_LEXSTATE[] = { 
      0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6, 6
   };
 
-  /**
+  /** 
    * Translates characters to character classes
    * Chosen bits are [10, 6, 5]
    * Total runtime size is 4224 bytes
@@ -77,7 +76,7 @@ public class _IdeaLogLexer implements FlexLexer {
     "\0\1\2\37\0\12\3\46\0\12\3\14\0\12\3\36\0\1\2\1\0\12\3\6\0\12\3\6\0\12\3\6"+
     "\0\14\2\34\0\2\2\5\0\1\2\57\0\1\2\26\0\12\3\16\0\62\3");
 
-  /**
+  /** 
    * Translates DFA states to action switch labels.
    */
   private static final int [] ZZ_ACTION = zzUnpackAction();
@@ -110,7 +109,7 @@ public class _IdeaLogLexer implements FlexLexer {
   }
 
 
-  /**
+  /** 
    * Translates a state to a row index in the transition table
    */
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
@@ -146,7 +145,7 @@ public class _IdeaLogLexer implements FlexLexer {
     return j;
   }
 
-  /**
+  /** 
    * The transition table of the DFA
    */
   private static final int [] ZZ_TRANS = zzUnpackTrans();
@@ -339,7 +338,7 @@ public class _IdeaLogLexer implements FlexLexer {
   }
 
 
-  /**
+  /** 
    * Unpacks the compressed character translation table.
    *
    * @param packed   the packed character translation table
@@ -359,23 +358,6 @@ public class _IdeaLogLexer implements FlexLexer {
       do map[j++] = value; while (--count > 0);
     }
     return map;
-  }
-
-  private static String zzToPrintable(CharSequence str) {
-    StringBuilder builder = new StringBuilder();
-    for (int n = 0 ; n < str.length() ; ) {
-      int ch = Character.codePointAt(str, n);
-      int charCount = Character.charCount(ch);
-      n += charCount;
-      if (ch > 31 && ch < 127) {
-        builder.append((char)ch);
-      } else if (charCount == 1) {
-        builder.append(String.format("\\u%04X", ch));
-      } else {
-        builder.append(String.format("\\U%06X", ch));
-      }
-    }
-    return builder.toString();
   }
 
   public final int getTokenStart() {
@@ -590,206 +572,115 @@ public class _IdeaLogLexer implements FlexLexer {
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
-          case 1:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [134] { stack.clear();"+ZZ_NL+"                                pushStateAndBegin(YY_TEXT_UNTIL_END_OF_LINE);"+ZZ_NL+"                                yypushback(yylength()); }");
+          case 1: 
             { stack.clear();
                                 pushStateAndBegin(YY_TEXT_UNTIL_END_OF_LINE);
                                 yypushback(yylength());
-            }
+            } 
             // fall through
           case 20: break;
-          case 2:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [78] { return TokenType.WHITE_SPACE; }");
+          case 2: 
             { return TokenType.WHITE_SPACE;
-            }
+            } 
             // fall through
           case 21: break;
-          case 3:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [102] { return CLASS_NAME; }");
+          case 3: 
             { return CLASS_NAME;
-            }
+            } 
             // fall through
           case 22: break;
-          case 4:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [109] { return MESSAGE; }");
+          case 4: 
             { return MESSAGE;
-            }
+            } 
             // fall through
           case 23: break;
-          case 5:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [111] { stack.clear();"+ZZ_NL+"                                pushStateAndBegin(YYINITIAL);"+ZZ_NL+"                                return TokenType.WHITE_SPACE; }");
+          case 5: 
             { stack.clear();
                                 pushStateAndBegin(YYINITIAL);
                                 return TokenType.WHITE_SPACE;
-            }
+            } 
             // fall through
           case 24: break;
-          case 6:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [84] { return UPTIME; }");
+          case 6: 
             { return UPTIME;
-            }
+            } 
             // fall through
           case 25: break;
-          case 7:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [83] { return BRACKET_START; }");
+          case 7: 
             { return BRACKET_START;
-            }
+            } 
             // fall through
           case 26: break;
-          case 8:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [85] { pushStateAndBegin(YY_LOG_RECORD);"+ZZ_NL+"                                return BRACKET_END; }");
+          case 8: 
             { pushStateAndBegin(YY_LOG_RECORD);
                                 return BRACKET_END;
-            }
+            } 
             // fall through
           case 27: break;
-          case 9:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [126] { return TEXT; }");
+          case 9: 
             { return TEXT;
-            }
+            } 
             // fall through
           case 28: break;
-          case 10:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [129] { popState();"+ZZ_NL+"                                return TEXT; }");
+          case 10: 
             { popState();
                                 return TEXT;
-            }
+            } 
             // fall through
           case 29: break;
-          case 11:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [104] { pushStateAndBegin(YY_AFTER_CLASS_NAME);"+ZZ_NL+"                                return TEXT; }");
+          case 11: 
             { pushStateAndBegin(YY_AFTER_CLASS_NAME);
                                 return TEXT;
-            }
+            } 
             // fall through
           case 30: break;
-          case 12:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [97] { pushStateAndBegin(YY_CLASS_NAME);"+ZZ_NL+"                               return TEXT; }");
+          case 12: 
             { pushStateAndBegin(YY_CLASS_NAME);
                                return TEXT;
-            }
+            } 
             // fall through
           case 31: break;
-          case 13:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [93] { return LOG_LEVEL_INFO; }");
+          case 13: 
             { return LOG_LEVEL_INFO;
-            }
+            } 
             // fall through
           case 32: break;
-          case 14:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [94] { return LOG_LEVEL_WARN; }");
+          case 14: 
             { return LOG_LEVEL_WARN;
-            }
+            } 
             // fall through
           case 33: break;
-          case 15:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [92] { return LOG_LEVEL_DEBUG; }");
+          case 15: 
             { return LOG_LEVEL_DEBUG;
-            }
+            } 
             // fall through
           case 34: break;
-          case 16:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [95] { return LOG_LEVEL_ERROR; }");
+          case 16: 
             { return LOG_LEVEL_ERROR;
-            }
+            } 
             // fall through
           case 35: break;
-          case 17:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [118] { popState();"+ZZ_NL+"                                return CODE_REFERENCE; }");
+          case 17: 
             { popState();
                                 return CODE_REFERENCE;
-            }
+            } 
             // fall through
           case 36: break;
-          case 18:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [123] { pushStateAndBegin(YY_STACK_TRACE_LINE);"+ZZ_NL+"                                yypushback(yylength()); }");
+          case 18: 
             { pushStateAndBegin(YY_STACK_TRACE_LINE);
                                 yypushback(yylength());
-            }
+            } 
             // fall through
           case 37: break;
-          case 19:
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [75] { pushStateAndBegin(YY_UPTIME);"+ZZ_NL+"                                return TIME_STAMP; }");
+          case 19: 
             { pushStateAndBegin(YY_UPTIME);
                                 return TIME_STAMP;
-            }
+            } 
             // fall through
           case 38: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
-      }
-    }
-  }
-
-  /**
-   * Runs the scanner on input files.
-   *
-   * This main method is the debugging routine for the scanner.
-   * It prints debugging information about each returned token to
-   * System.out until the end of file is reached, or an error occured.
-   *
-   * @param argv   the command line, contains the filenames to run
-   *               the scanner on.
-   */
-  public static void main(String argv[]) {
-    if (argv.length == 0) {
-      System.out.println("Usage : java _IdeaLogLexer [ --encoding <name> ] <inputfile(s)>");
-    }
-    else {
-      int firstFilePos = 0;
-      String encodingName = "UTF-8";
-      if (argv[0].equals("--encoding")) {
-        firstFilePos = 2;
-        encodingName = argv[1];
-        try {
-          java.nio.charset.Charset.forName(encodingName); // Side-effect: is encodingName valid?
-        } catch (Exception e) {
-          System.out.println("Invalid encoding '" + encodingName + "'");
-          return;
-        }
-      }
-      for (int i = firstFilePos; i < argv.length; i++) {
-        _IdeaLogLexer scanner = null;
-        try {
-          java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
-          java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
-          scanner = new _IdeaLogLexer(reader);
-          do {
-            System.out.println(scanner.advance());
-          } while (!scanner.zzAtEOF);
-
-        }
-        catch (java.io.FileNotFoundException e) {
-          System.out.println("File not found : \""+argv[i]+"\"");
-        }
-        catch (java.io.IOException e) {
-          System.out.println("IO error scanning file \""+argv[i]+"\"");
-          System.out.println(e);
-        }
-        catch (Exception e) {
-          System.out.println("Unexpected exception:");
-          e.printStackTrace();
-        }
       }
     }
   }
