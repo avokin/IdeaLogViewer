@@ -64,13 +64,15 @@ WHITE_SPACE     = ([ \f\n\r\t\u000b​\u00a0\u1680​\u180e\u2000-\u200a​\u202
 TIME_STAMP      = [0-9\-:, ]+
 UPTIME          = [ \t]*\d+
 
-%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD, YY_UPTIME
+%state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD, YY_UPTIME, YY_TEXT_UNTIL_END_OF_LINE
 
 %%
 
 <YYINITIAL> {
   {TIME_STAMP}                { pushStateAndBegin(YY_UPTIME);
                                 return TIME_STAMP; }
+
+  [\n]                        { return TokenType.WHITE_SPACE; }
 }
 
 <YY_UPTIME> {
@@ -108,7 +110,14 @@ UPTIME          = [ \t]*\d+
                                 return TokenType.WHITE_SPACE; }
 }
 
-
-[^]                           { stack.clear();
+<YY_TEXT_UNTIL_END_OF_LINE> {
+  [^\n]+[\n]                  { stack.clear();
                                 pushStateAndBegin(YYINITIAL);
                                 return TEXT; }
+  [^]                         { return TEXT; }
+}
+
+
+[^]                           { stack.clear();
+                                pushStateAndBegin(YY_TEXT_UNTIL_END_OF_LINE);
+                                yypushback(yylength());}
