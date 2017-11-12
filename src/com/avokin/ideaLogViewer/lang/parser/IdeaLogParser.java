@@ -1,5 +1,6 @@
 package com.avokin.ideaLogViewer.lang.parser;
 
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -7,8 +8,7 @@ import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes.*;
-import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.MESSAGE;
-import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.TIME_STAMP;
+import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
 public class IdeaLogParser implements PsiParser {
     private static final String IDE_STARTED_MESSAGE = "------------------------------------------------------ IDE STARTED ------------------------------------------------------";
@@ -46,7 +46,13 @@ public class IdeaLogParser implements PsiParser {
                     recordElementType = LOADED_PLUGINS_RECORD;
                 }
             }
-            builder.advanceLexer();
+            if (builder.getTokenType() == CODE_REFERENCE) {
+                PsiBuilder.Marker codeReferenceMarker = builder.mark();
+                builder.advanceLexer();
+                codeReferenceMarker.done(CODE_REFERENCE_ELEMENT);
+            } else {
+                builder.advanceLexer();
+            }
         }
         logRecordMarker.done(recordElementType);
     }
