@@ -16,4 +16,6 @@ public interface IdeaLogViewerTokenTypes {
   IElementType BRACKET_START = new IdeaLogElementType("BRACKET_START");
   IElementType BRACKET_END = new IdeaLogElementType("BRACKET_END");
   IElementType UPTIME = new IdeaLogElementType("UPTIME");
+
+  IElementType CODE_REFERENCE = new IdeaLogElementType("CODE_REFERENCE");
 }

@@ -24,6 +24,7 @@ public class _IdeaLogLexer implements FlexLexer {
 
   /** initial size of the lookahead buffer */
   private static final int ZZ_BUFFERSIZE = 16384;
+  private static final String ZZ_NL = System.getProperty("line.separator");
 
   /** lexical states */
   public static final int YYINITIAL = 0;
@@ -32,6 +33,7 @@ public class _IdeaLogLexer implements FlexLexer {
   public static final int YY_LOG_RECORD = 6;
   public static final int YY_UPTIME = 8;
   public static final int YY_TEXT_UNTIL_END_OF_LINE = 10;
+  public static final int YY_STACK_TRACE_LINE = 12;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -39,14 +41,14 @@ public class _IdeaLogLexer implements FlexLexer {
    *                  at the beginning of a line
    * l is of the form l = 2*k, k a non negative integer
    */
-  private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5, 5
+  private static final int ZZ_LEXSTATE[] = {
+     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6, 6
   };
 
-  /** 
+  /**
    * Translates characters to character classes
    * Chosen bits are [10, 6, 5]
-   * Total runtime size is 4160 bytes
+   * Total runtime size is 4224 bytes
    */
   public static int ZZ_CMAP(int ch) {
     return ZZ_CMAP_A[(ZZ_CMAP_Y[(ZZ_CMAP_Z[ch>>11]<<6)|((ch>>5)&0x3f)]<<5)|(ch&0x1f)];
@@ -59,34 +61,37 @@ public class _IdeaLogLexer implements FlexLexer {
 
   /* The ZZ_CMAP_Y table has 1024 entries */
   static final char ZZ_CMAP_Y[] = zzUnpackCMap(
-    "\1\0\1\1\1\2\2\3\1\4\55\3\1\5\3\3\1\6\6\3\1\5\14\3\1\7\3\3\1\7\3\3\1\7\3\3"+
-    "\1\7\3\3\1\7\3\3\1\7\3\3\1\7\3\3\1\7\3\3\1\7\3\3\1\7\2\3\1\6\3\3\1\6\2\3\1"+
-    "\5\10\3\1\5\1\3\1\6\57\3\1\4\12\3\1\5\1\10\11\3\1\7\3\3\1\6\5\3\1\11\5\3\1"+
-    "\6\2\3\1\6\4\3\1\11\35\3\1\12\1\13\1\14\175\3\1\4\160\3\1\5\24\3\1\6\1\3\1"+
-    "\5\5\3\2\6\2\3\1\6\14\3\1\6\130\3\1\6\54\3\1\5\35\3\1\7\3\3\1\6\1\3\1\15\4"+
-    "\3\1\6\10\3\1\6\12\3\1\6\3\3\1\6\13\3\1\6\3\3\1\5\2\3\1\6\15\3\1\5\32\3\1"+
-    "\6\60\3\1\5\6\3\1\6\143\3\1\16\1\17\12\3\1\6\65\3");
+    "\1\0\1\1\1\2\1\3\1\4\1\5\55\4\1\6\3\4\1\7\6\4\1\6\14\4\1\10\3\4\1\10\3\4\1"+
+    "\10\3\4\1\10\3\4\1\10\3\4\1\10\3\4\1\10\3\4\1\10\3\4\1\10\3\4\1\10\2\4\1\7"+
+    "\3\4\1\7\2\4\1\6\10\4\1\6\1\4\1\7\57\4\1\5\12\4\1\6\1\11\11\4\1\10\3\4\1\7"+
+    "\5\4\1\12\5\4\1\7\2\4\1\7\4\4\1\12\35\4\1\13\1\14\1\15\175\4\1\5\160\4\1\6"+
+    "\24\4\1\7\1\4\1\6\5\4\2\7\2\4\1\7\14\4\1\7\130\4\1\7\54\4\1\6\35\4\1\10\3"+
+    "\4\1\7\1\4\1\16\4\4\1\7\10\4\1\7\12\4\1\7\3\4\1\7\13\4\1\7\3\4\1\6\2\4\1\7"+
+    "\15\4\1\6\32\4\1\7\60\4\1\6\6\4\1\7\143\4\1\17\1\20\12\4\1\7\65\4");
 
-  /* The ZZ_CMAP_A table has 512 entries */
+  /* The ZZ_CMAP_A table has 544 entries */
   static final char ZZ_CMAP_A[] = zzUnpackCMap(
-    "\11\0\1\7\1\10\3\1\22\0\1\4\13\0\1\6\1\3\2\0\12\2\1\5\6\0\1\25\1\15\1\0\1"+
-    "\13\1\14\1\22\1\17\1\0\1\20\4\0\1\21\1\23\2\0\1\26\2\0\1\16\1\0\1\24\3\0\1"+
-    "\11\1\0\1\12\42\0\1\1\37\0\12\2\46\0\12\2\14\0\12\2\36\0\1\1\1\0\12\2\6\0"+
-    "\12\2\6\0\12\2\6\0\14\1\34\0\2\1\5\0\1\1\57\0\1\1\26\0\12\2\16\0\62\2");
+    "\11\0\1\10\1\1\3\2\22\0\1\5\7\0\1\15\1\16\2\0\1\7\1\4\1\13\1\0\12\14\1\6\6"+
+    "\0\1\33\1\23\1\13\1\21\1\22\1\30\1\25\1\13\1\26\4\13\1\27\1\31\2\13\1\34\2"+
+    "\13\1\24\1\13\1\32\3\13\1\17\1\0\1\20\1\0\1\13\1\0\1\11\22\13\1\12\6\13\45"+
+    "\0\1\2\37\0\12\3\46\0\12\3\14\0\12\3\36\0\1\2\1\0\12\3\6\0\12\3\6\0\12\3\6"+
+    "\0\14\2\34\0\2\2\5\0\1\2\57\0\1\2\26\0\12\3\16\0\62\3");
 
-  /** 
+  /**
    * Translates DFA states to action switch labels.
    */
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\6\0\2\1\1\2\1\3\1\1\1\4\1\5\2\2"+
-    "\4\1\1\6\1\2\1\7\1\10\2\11\10\0\1\12"+
-    "\1\0\1\13\1\14\7\0\1\15\1\16\1\0\1\17"+
-    "\1\20\21\0\1\21";
+    "\7\0\1\1\1\2\1\1\1\3\1\1\1\4\1\5"+
+    "\2\2\4\1\1\6\1\2\1\7\1\10\1\11\1\12"+
+    "\1\11\2\1\7\0\1\11\4\0\1\13\1\14\4\0"+
+    "\1\11\5\0\1\15\1\16\2\11\2\0\1\17\1\20"+
+    "\1\11\2\0\1\11\1\21\2\0\1\11\1\0\1\11"+
+    "\2\0\1\11\1\0\1\11\2\0\1\22\10\0\1\23";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[67];
+    int [] result = new int[88];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -105,24 +110,26 @@ public class _IdeaLogLexer implements FlexLexer {
   }
 
 
-  /** 
+  /**
    * Translates a state to a row index in the transition table
    */
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\27\0\56\0\105\0\134\0\163\0\212\0\241"+
-    "\0\212\0\270\0\317\0\346\0\212\0\375\0\u0114\0\u012b"+
-    "\0\u0142\0\u0159\0\u0170\0\u0187\0\u019e\0\212\0\212\0\u01b5"+
-    "\0\212\0\u01cc\0\u01e3\0\u01fa\0\u0211\0\u0228\0\u023f\0\u0256"+
-    "\0\u01b5\0\212\0\u026d\0\212\0\u01fa\0\u0284\0\u029b\0\u02b2"+
-    "\0\u02c9\0\u02e0\0\u02f7\0\u030e\0\212\0\212\0\u0325\0\212"+
-    "\0\212\0\u033c\0\u0353\0\u036a\0\u0381\0\u0398\0\u03af\0\u03c6"+
-    "\0\u03dd\0\u03f4\0\u040b\0\u0422\0\u0439\0\u0450\0\u0467\0\u047e"+
-    "\0\u0495\0\u04ac\0\212";
+    "\0\0\0\35\0\72\0\127\0\164\0\221\0\256\0\313"+
+    "\0\313\0\350\0\u0105\0\u0122\0\u013f\0\313\0\u015c\0\u0179"+
+    "\0\u0196\0\u01b3\0\u01d0\0\u01ed\0\u020a\0\u0227\0\313\0\313"+
+    "\0\u0244\0\313\0\u0261\0\u027e\0\u029b\0\u02b8\0\u02d5\0\u02f2"+
+    "\0\u030f\0\u032c\0\u0349\0\u0366\0\u0383\0\u03a0\0\u029b\0\u03bd"+
+    "\0\u03da\0\313\0\u02f2\0\u03f7\0\u0414\0\u0431\0\u044e\0\u046b"+
+    "\0\u0488\0\u04a5\0\u04c2\0\u04df\0\u04fc\0\313\0\313\0\u0519"+
+    "\0\313\0\u0536\0\u0553\0\313\0\313\0\u0570\0\u058d\0\u05aa"+
+    "\0\u05c7\0\313\0\u05e4\0\u0601\0\u061e\0\u063b\0\u0658\0\u0675"+
+    "\0\u0692\0\u06af\0\u06cc\0\u06e9\0\u0706\0\u0723\0\313\0\u0740"+
+    "\0\u075d\0\u077a\0\u0797\0\u07b4\0\u07d1\0\u07ee\0\u080b\0\313";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[67];
+    int [] result = new int[88];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -139,36 +146,56 @@ public class _IdeaLogLexer implements FlexLexer {
     return j;
   }
 
-  /** 
+  /**
    * The transition table of the DFA
    */
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\2\7\1\10\5\7\1\11\16\7\3\12\1\7\1\13"+
-    "\2\12\2\7\16\12\10\14\1\15\16\14\1\7\1\16"+
-    "\2\7\1\17\2\7\2\16\2\7\1\20\1\21\3\7"+
-    "\1\22\3\7\1\23\3\7\1\16\1\24\1\7\1\25"+
-    "\2\7\1\25\1\16\1\26\1\27\14\7\10\30\1\31"+
-    "\16\30\31\0\1\32\24\0\3\12\2\0\2\12\2\0"+
-    "\16\12\3\0\1\33\23\0\10\14\1\0\16\14\1\0"+
-    "\1\16\2\0\1\16\2\0\2\16\17\0\1\16\1\0"+
-    "\1\34\1\16\2\0\2\16\32\0\1\35\40\0\1\36"+
-    "\21\0\1\37\32\0\1\40\3\0\1\24\25\0\1\16"+
-    "\1\24\1\0\1\25\2\0\1\25\1\16\16\0\10\41"+
-    "\1\42\16\41\2\0\1\43\30\0\1\44\26\0\1\45"+
-    "\37\0\1\46\37\0\1\47\22\0\1\50\32\0\1\51"+
-    "\2\0\1\52\42\0\1\53\33\0\1\54\26\0\1\55"+
-    "\24\0\1\56\10\0\1\57\42\0\1\60\35\0\1\61"+
-    "\2\0\1\62\26\0\1\63\1\64\26\0\1\64\25\0"+
-    "\1\65\26\0\1\66\1\0\1\67\26\0\1\67\24\0"+
-    "\1\70\26\0\1\71\2\0\1\72\26\0\1\72\23\0"+
-    "\1\73\26\0\1\74\2\0\1\75\26\0\1\75\23\0"+
-    "\1\76\26\0\1\77\3\0\1\100\26\0\1\100\22\0"+
-    "\1\101\26\0\1\102\26\0\1\103\24\0";
+    "\1\10\1\11\1\10\1\12\10\10\1\12\20\10\1\13"+
+    "\1\10\2\13\1\10\1\14\2\13\1\10\24\13\1\15"+
+    "\1\16\33\15\1\10\2\17\2\10\1\20\2\10\1\17"+
+    "\10\10\1\21\1\22\3\10\1\23\3\10\1\24\3\10"+
+    "\2\17\1\25\1\10\1\26\2\10\1\26\3\10\1\25"+
+    "\2\10\1\27\1\30\14\10\1\31\1\32\3\31\1\33"+
+    "\2\31\1\33\24\31\5\10\1\34\2\10\1\34\4\35"+
+    "\4\10\14\35\40\0\1\36\10\0\1\36\20\0\1\13"+
+    "\1\0\2\13\2\0\2\13\1\0\24\13\4\0\1\37"+
+    "\30\0\1\15\1\0\33\15\1\0\2\17\2\0\1\17"+
+    "\2\0\1\17\25\0\2\17\1\0\1\40\1\17\2\0"+
+    "\1\17\46\0\1\41\46\0\1\42\27\0\1\43\40\0"+
+    "\1\44\4\0\1\25\10\0\1\25\21\0\2\17\1\25"+
+    "\1\0\1\26\2\0\1\26\3\0\1\25\20\0\1\31"+
+    "\1\0\34\31\1\0\7\31\1\45\23\31\11\0\1\46"+
+    "\34\0\4\47\1\50\3\0\14\47\3\0\1\51\10\0"+
+    "\1\51\25\0\1\52\34\0\1\53\52\0\1\54\45\0"+
+    "\1\55\30\0\1\56\40\0\1\57\1\31\1\0\10\31"+
+    "\1\60\22\31\12\0\1\61\33\0\4\62\4\0\14\62"+
+    "\3\0\1\63\10\0\1\63\44\0\1\64\41\0\1\65"+
+    "\34\0\1\66\32\0\1\67\5\0\1\31\1\0\3\31"+
+    "\1\70\2\31\1\70\24\31\5\0\1\71\2\0\1\71"+
+    "\32\0\1\72\2\0\4\62\4\0\14\62\4\0\1\73"+
+    "\55\0\1\74\43\0\1\75\1\31\1\0\7\31\4\76"+
+    "\4\31\14\76\3\0\1\77\10\0\1\77\23\0\1\100"+
+    "\10\0\1\100\20\0\1\31\1\0\7\31\4\76\1\101"+
+    "\3\31\14\76\3\0\1\77\10\0\1\77\1\0\1\102"+
+    "\21\0\1\103\1\104\7\0\1\103\20\0\1\31\1\0"+
+    "\7\31\4\105\4\31\14\105\4\0\1\104\33\0\1\106"+
+    "\10\0\1\106\20\0\1\31\1\0\4\31\1\107\2\31"+
+    "\4\105\4\31\14\105\3\0\1\110\1\0\1\111\6\0"+
+    "\1\110\20\0\1\31\1\0\1\31\1\112\10\31\1\112"+
+    "\20\31\5\0\1\111\32\0\1\113\10\0\1\113\20\0"+
+    "\1\31\1\0\1\31\1\112\10\31\1\112\1\31\1\114"+
+    "\16\31\3\0\1\115\2\0\1\116\5\0\1\115\20\0"+
+    "\1\31\1\117\33\31\6\0\1\116\31\0\1\120\10\0"+
+    "\1\120\23\0\1\121\2\0\1\122\5\0\1\121\26\0"+
+    "\1\122\31\0\1\123\10\0\1\123\23\0\1\124\3\0"+
+    "\1\125\4\0\1\124\27\0\1\125\30\0\1\126\10\0"+
+    "\1\126\23\0\1\127\10\0\1\127\23\0\1\130\10\0"+
+    "\1\130\20\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1219];
+    int [] result = new int[2088];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -206,12 +233,14 @@ public class _IdeaLogLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\6\0\1\11\1\1\1\11\3\1\1\11\10\1\2\11"+
-    "\1\1\1\11\10\0\1\11\1\0\1\11\1\1\7\0"+
-    "\2\11\1\0\2\11\21\0\1\11";
+    "\7\0\2\11\4\1\1\11\10\1\2\11\1\1\1\11"+
+    "\3\1\7\0\1\1\4\0\1\11\1\1\4\0\1\1"+
+    "\5\0\2\11\1\1\1\11\2\0\2\11\1\1\2\0"+
+    "\1\1\1\11\2\0\1\1\1\0\1\1\2\0\1\1"+
+    "\1\0\1\1\2\0\1\11\10\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[67];
+    int [] result = new int[88];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -310,7 +339,7 @@ public class _IdeaLogLexer implements FlexLexer {
   }
 
 
-  /** 
+  /**
    * Unpacks the compressed character translation table.
    *
    * @param packed   the packed character translation table
@@ -330,6 +359,23 @@ public class _IdeaLogLexer implements FlexLexer {
       do map[j++] = value; while (--count > 0);
     }
     return map;
+  }
+
+  private static String zzToPrintable(CharSequence str) {
+    StringBuilder builder = new StringBuilder();
+    for (int n = 0 ; n < str.length() ; ) {
+      int ch = Character.codePointAt(str, n);
+      int charCount = Character.charCount(ch);
+      n += charCount;
+      if (ch > 31 && ch < 127) {
+        builder.append((char)ch);
+      } else if (charCount == 1) {
+        builder.append(String.format("\\u%04X", ch));
+      } else {
+        builder.append(String.format("\\U%06X", ch));
+      }
+    }
+    return builder.toString();
   }
 
   public final int getTokenStart() {
@@ -544,104 +590,206 @@ public class _IdeaLogLexer implements FlexLexer {
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
-          case 1: 
+          case 1:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [134] { stack.clear();"+ZZ_NL+"                                pushStateAndBegin(YY_TEXT_UNTIL_END_OF_LINE);"+ZZ_NL+"                                yypushback(yylength()); }");
             { stack.clear();
                                 pushStateAndBegin(YY_TEXT_UNTIL_END_OF_LINE);
                                 yypushback(yylength());
-            } 
-            // fall through
-          case 18: break;
-          case 2: 
-            { return TokenType.WHITE_SPACE;
-            } 
-            // fall through
-          case 19: break;
-          case 3: 
-            { return CLASS_NAME;
-            } 
+            }
             // fall through
           case 20: break;
-          case 4: 
-            { return MESSAGE;
-            } 
+          case 2:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [78] { return TokenType.WHITE_SPACE; }");
+            { return TokenType.WHITE_SPACE;
+            }
             // fall through
           case 21: break;
-          case 5: 
+          case 3:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [102] { return CLASS_NAME; }");
+            { return CLASS_NAME;
+            }
+            // fall through
+          case 22: break;
+          case 4:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [109] { return MESSAGE; }");
+            { return MESSAGE;
+            }
+            // fall through
+          case 23: break;
+          case 5:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [111] { stack.clear();"+ZZ_NL+"                                pushStateAndBegin(YYINITIAL);"+ZZ_NL+"                                return TokenType.WHITE_SPACE; }");
             { stack.clear();
                                 pushStateAndBegin(YYINITIAL);
                                 return TokenType.WHITE_SPACE;
-            } 
-            // fall through
-          case 22: break;
-          case 6: 
-            { return UPTIME;
-            } 
-            // fall through
-          case 23: break;
-          case 7: 
-            { return BRACKET_START;
-            } 
+            }
             // fall through
           case 24: break;
-          case 8: 
-            { pushStateAndBegin(YY_LOG_RECORD);
-                                return BRACKET_END;
-            } 
+          case 6:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [84] { return UPTIME; }");
+            { return UPTIME;
+            }
             // fall through
           case 25: break;
-          case 9: 
-            { return TEXT;
-            } 
+          case 7:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [83] { return BRACKET_START; }");
+            { return BRACKET_START;
+            }
             // fall through
           case 26: break;
-          case 10: 
-            { stack.clear();
-                                pushStateAndBegin(YYINITIAL);
-                                return TEXT;
-            } 
+          case 8:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [85] { pushStateAndBegin(YY_LOG_RECORD);"+ZZ_NL+"                                return BRACKET_END; }");
+            { pushStateAndBegin(YY_LOG_RECORD);
+                                return BRACKET_END;
+            }
             // fall through
           case 27: break;
-          case 11: 
-            { pushStateAndBegin(YY_AFTER_CLASS_NAME);
-                                return TEXT;
-            } 
+          case 9:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [126] { return TEXT; }");
+            { return TEXT;
+            }
             // fall through
           case 28: break;
-          case 12: 
-            { pushStateAndBegin(YY_CLASS_NAME);
-                               return TEXT;
-            } 
+          case 10:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [129] { popState();"+ZZ_NL+"                                return TEXT; }");
+            { popState();
+                                return TEXT;
+            }
             // fall through
           case 29: break;
-          case 13: 
-            { return LOG_LEVEL_INFO;
-            } 
+          case 11:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [104] { pushStateAndBegin(YY_AFTER_CLASS_NAME);"+ZZ_NL+"                                return TEXT; }");
+            { pushStateAndBegin(YY_AFTER_CLASS_NAME);
+                                return TEXT;
+            }
             // fall through
           case 30: break;
-          case 14: 
-            { return LOG_LEVEL_WARN;
-            } 
+          case 12:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [97] { pushStateAndBegin(YY_CLASS_NAME);"+ZZ_NL+"                               return TEXT; }");
+            { pushStateAndBegin(YY_CLASS_NAME);
+                               return TEXT;
+            }
             // fall through
           case 31: break;
-          case 15: 
-            { return LOG_LEVEL_DEBUG;
-            } 
+          case 13:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [93] { return LOG_LEVEL_INFO; }");
+            { return LOG_LEVEL_INFO;
+            }
             // fall through
           case 32: break;
-          case 16: 
-            { return LOG_LEVEL_ERROR;
-            } 
+          case 14:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [94] { return LOG_LEVEL_WARN; }");
+            { return LOG_LEVEL_WARN;
+            }
             // fall through
           case 33: break;
-          case 17: 
-            { pushStateAndBegin(YY_UPTIME);
-                                return TIME_STAMP;
-            } 
+          case 15:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [92] { return LOG_LEVEL_DEBUG; }");
+            { return LOG_LEVEL_DEBUG;
+            }
             // fall through
           case 34: break;
+          case 16:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [95] { return LOG_LEVEL_ERROR; }");
+            { return LOG_LEVEL_ERROR;
+            }
+            // fall through
+          case 35: break;
+          case 17:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [118] { popState();"+ZZ_NL+"                                return CODE_REFERENCE; }");
+            { popState();
+                                return CODE_REFERENCE;
+            }
+            // fall through
+          case 36: break;
+          case 18:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [123] { pushStateAndBegin(YY_STACK_TRACE_LINE);"+ZZ_NL+"                                yypushback(yylength()); }");
+            { pushStateAndBegin(YY_STACK_TRACE_LINE);
+                                yypushback(yylength());
+            }
+            // fall through
+          case 37: break;
+          case 19:
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [75] { pushStateAndBegin(YY_UPTIME);"+ZZ_NL+"                                return TIME_STAMP; }");
+            { pushStateAndBegin(YY_UPTIME);
+                                return TIME_STAMP;
+            }
+            // fall through
+          case 38: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
+      }
+    }
+  }
+
+  /**
+   * Runs the scanner on input files.
+   *
+   * This main method is the debugging routine for the scanner.
+   * It prints debugging information about each returned token to
+   * System.out until the end of file is reached, or an error occured.
+   *
+   * @param argv   the command line, contains the filenames to run
+   *               the scanner on.
+   */
+  public static void main(String argv[]) {
+    if (argv.length == 0) {
+      System.out.println("Usage : java _IdeaLogLexer [ --encoding <name> ] <inputfile(s)>");
+    }
+    else {
+      int firstFilePos = 0;
+      String encodingName = "UTF-8";
+      if (argv[0].equals("--encoding")) {
+        firstFilePos = 2;
+        encodingName = argv[1];
+        try {
+          java.nio.charset.Charset.forName(encodingName); // Side-effect: is encodingName valid?
+        } catch (Exception e) {
+          System.out.println("Invalid encoding '" + encodingName + "'");
+          return;
+        }
+      }
+      for (int i = firstFilePos; i < argv.length; i++) {
+        _IdeaLogLexer scanner = null;
+        try {
+          java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
+          java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
+          scanner = new _IdeaLogLexer(reader);
+          do {
+            System.out.println(scanner.advance());
+          } while (!scanner.zzAtEOF);
+
+        }
+        catch (java.io.FileNotFoundException e) {
+          System.out.println("File not found : \""+argv[i]+"\"");
+        }
+        catch (java.io.IOException e) {
+          System.out.println("IO error scanning file \""+argv[i]+"\"");
+          System.out.println(e);
+        }
+        catch (Exception e) {
+          System.out.println("Unexpected exception:");
+          e.printStackTrace();
+        }
       }
     }
   }
