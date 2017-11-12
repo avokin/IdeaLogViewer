@@ -61,7 +61,7 @@ import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
 
 WHITE_SPACE     = ([ \f\n\r\t\u000b​\u00a0\u1680​\u180e\u2000-\u200a​\u2028\u2029​​\u202f\u205f​\u3000])+
-TIME_STAMP      = [0-9\-:, ]+
+TIME_STAMP      = (\d{4}-\d{1,2}-\d{1,2}[ ]\d{1,2}:\d{1,2}:\d{1,2},\d{3})
 UPTIME          = [ \t]*\d+
 
 %state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD, YY_UPTIME, YY_TEXT_UNTIL_END_OF_LINE
