@@ -20,4 +20,10 @@
         <psiStructureViewFactory language="IDEA log"
                                  implementationClass="com.avokin.ideaLogViewer.structureView.IdeaLogStructureViewFactory"/>
     </extensions>
+
+    <actions>
+        <action id="OpenLogFileInEditor" class="com.avokin.ideaLogViewer.editor.OpenIdeaLogInEditor" text="Open idea.log file" description="Open the idea.log file in the editor">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift L"/>
+        </action>
+    </actions>
 </idea-plugin>
