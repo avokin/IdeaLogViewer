@@ -1,18 +1,23 @@
 package com.avokin.ideaLogViewer.structureView;
 
 import com.avokin.ideaLogViewer.IdeaLogItemPresentation;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogRecord;
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogLaunch;
+import com.avokin.ideaLogViewer.lang.psi.IdeaLogLoadedPluginsRecord;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IdeaLogStructureViewElement implements StructureViewTreeElement {
-    private IdeaLogRecord myElement;
+    private PsiElement myElement;
     private String myPresentableText;
 
-    IdeaLogStructureViewElement(@NotNull IdeaLogRecord ideaLogRecord, @NotNull String text) {
+    IdeaLogStructureViewElement(@NotNull PsiElement ideaLogRecord, @NotNull String text) {
         myElement = ideaLogRecord;
         myPresentableText = text;
     }
@@ -31,12 +36,23 @@ public class IdeaLogStructureViewElement implements StructureViewTreeElement {
     @NotNull
     @Override
     public TreeElement[] getChildren() {
+        if (myElement instanceof IdeaLogLaunch) {
+            List<TreeElement> result = new ArrayList<>();
+            for (PsiElement element : myElement.getChildren()) {
+                if (element instanceof IdeaLogLoadedPluginsRecord) {
+                    String presentableText = "Loaded bundled plugins";
+                    result.add(new IdeaLogStructureViewElement(element, presentableText));
+                }
+            }
+            return result.toArray(new TreeElement[result.size()]);
+        }
         return TreeElement.EMPTY_ARRAY;
     }
 
     @Override
     public void navigate(boolean requestFocus) {
-        new OpenFileDescriptor(myElement.getProject(), myElement.getContainingFile().getVirtualFile(), myElement.getTextOffset()).navigate(requestFocus);
+        new OpenFileDescriptor(myElement.getProject(), myElement.getContainingFile().getVirtualFile(),
+                myElement.getTextOffset()).navigate(requestFocus);
     }
 
     @Override

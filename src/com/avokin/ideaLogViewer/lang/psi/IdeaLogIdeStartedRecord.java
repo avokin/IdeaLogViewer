@@ -11,10 +11,4 @@ public class IdeaLogIdeStartedRecord extends IdeaLogRecord {
     public IdeaLogIdeStartedRecord(@NotNull ASTNode node) {
         super(node);
     }
-
-    @Nullable
-    @Override
-    public Icon getIcon(int flags) {
-        return AllIcons.General.Run;
-    }
 }

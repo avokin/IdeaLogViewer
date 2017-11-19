@@ -2,10 +2,7 @@ package com.avokin.ideaLogViewer.structureView;
 
 import com.avokin.ideaLogViewer.IdeaLogItemPresentation;
 import com.avokin.ideaLogViewer.IdeaLogStringUtil;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogFileType;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogIdeStartedRecord;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogLoadedPluginsRecord;
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogRecord;
+import com.avokin.ideaLogViewer.lang.psi.*;
 import com.intellij.ide.structureView.StructureViewModel;
 import com.intellij.ide.structureView.StructureViewTreeElement;
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
@@ -56,14 +53,10 @@ public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel
             @Override
             public TreeElement[] getChildren() {
                 List<TreeElement> result = new ArrayList<>();
-                for (PsiElement logRecord: myIdeaLogFile.getFirstChild().getChildren()) {
-                    if (logRecord instanceof IdeaLogIdeStartedRecord) {
-                      String presentableText = "IDE Started: " + IdeaLogStringUtil.shorten(logRecord.getText(), 22);
-                      result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord, presentableText));
-                    }
-                    if (logRecord instanceof IdeaLogLoadedPluginsRecord) {
-                        String presentableText = "Loaded bundled plugins";
-                        result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord, presentableText));
+                for (PsiElement element: myIdeaLogFile.getFirstChild().getChildren()) {
+                    if (element instanceof IdeaLogLaunch) {
+                        String presentableText = "Launch: " + IdeaLogStringUtil.shorten(element.getText(), 22);
+                        result.add(new IdeaLogStructureViewElement((IdeaLogLaunch) element, presentableText));
                     }
                 }
                 return result.toArray(new TreeElement[result.size()]);
