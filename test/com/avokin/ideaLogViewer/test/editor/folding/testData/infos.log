@@ -1,0 +1,33 @@
+<fold text='INFO...'>2017-11-12 11:57:42,206 [   9501]   INFO - gement.rbenv.RbenvSdkRefresher - rubies folder doesn't exist
+2017-11-12 11:57:42,206 [   9501]   INFO - gement.rbenv.RbenvSdkRefresher - rubies folder doesn't exist
+2017-11-12 11:57:42,206 [   9501]   INFO - gement.rbenv.RbenvSdkRefresher - rubies folder doesn't exist</fold>
+2017-11-12 17:25:08,604 [22444272]   WARN - ij.compiler.impl.CompileDriver - java.nio.BufferOverflowException
+	at java.nio.DirectByteBuffer.put(DirectByteBuffer.java:363)
+	at org.jetbrains.plugins.cucumber.java.run.CucumberJvm2SMFormatter.handleTestCaseFinished(PagedFileStorage.java:188)
+	at com.intellij.util.io.ResizeableMappedFile.put(ResizeableMappedFile.java:247)
+	at com.intellij.util.io.AppendableStorageBackedByResizableMappedFile.flushKeyStoreBuffer(AppendableStorageBackedByResizableMappedFile.java:46)
+	at com.intellij.util.io.AppendableStorageBackedByResizableMappedFile.close(AppendableStorageBackedByResizableMappedFile.java:61)
+	at com.intellij.util.io.PersistentEnumeratorBase.doClose(PersistentEnumeratorBase.java:517)
+	at com.intellij.util.io.PersistentBTreeEnumerator.doClose(PersistentBTreeEnumerator.java:194)
+	at com.intellij.util.io.PersistentEnumeratorBase.close(PersistentEnumeratorBase.java:506)
+	at com.intellij.util.io.PersistentEnumeratorDelegate.close(PersistentEnumeratorDelegate.java:61)
+	at com.intellij.util.io.PersistentStringEnumerator.close(PersistentStringEnumerator.java:81)
+	at org.jetbrains.jps.backwardRefs.CompilerBackwardReferenceIndex.close(CompilerBackwardReferenceIndex.java:222)
+	at org.jetbrains.jps.backwardRefs.CompilerBackwardReferenceIndex.close(CompilerBackwardReferenceIndex.java:123)
+	at org.jetbrains.jps.backwardRefs.BackwardReferenceIndexWriter.close(BackwardReferenceIndexWriter.java:131)
+	at org.jetbrains.jps.backwardRefs.BackwardReferenceIndexWriter.closeIfNeed(BackwardReferenceIndexWriter.java:62)
+	at org.jetbrains.jps.backwardRefs.BackwardReferenceIndexBuilder.buildFinished(BackwardReferenceIndexBuilder.java:75)
+	at org.jetbrains.jps.incremental.IncProjectBuilder.runBuild(IncProjectBuilder.java:398)
+	at org.jetbrains.jps.incremental.IncProjectBuilder.build(IncProjectBuilder.java:192)
+	at org.jetbrains.jps.cmdline.BuildRunner.runBuild(BuildRunner.java:138)
+	at org.jetbrains.jps.cmdline.BuildSession.runBuild(BuildSession.java:308)
+	at org.jetbrains.jps.cmdline.BuildSession.run(BuildSession.java:138)
+	at org.jetbrains.jps.cmdline.BuildMain$MyMessageHandler.lambda$channelRead0$0(BuildMain.java:235)
+	at org.jetbrains.jps.service.impl.SharedThreadPoolImpl.lambda$executeOnPooledThread$0(SharedThreadPoolImpl.java:42)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+<fold text='INFO...'>2017-11-19 18:54:05,857 [   4806]   INFO - pl$FileIndexDataInitialization - Initialization done:798
+2017-11-19 18:54:05,904 [   4853]   INFO - exImpl$StubIndexInitialization - Initialization done:47</fold>

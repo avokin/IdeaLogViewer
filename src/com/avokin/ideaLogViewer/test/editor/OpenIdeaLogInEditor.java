@@ -1,4 +1,4 @@
-package com.avokin.ideaLogViewer.editor;
+package com.avokin.ideaLogViewer.test.editor;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;

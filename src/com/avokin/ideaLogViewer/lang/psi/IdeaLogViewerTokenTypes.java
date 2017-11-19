@@ -1,6 +1,7 @@
 package com.avokin.ideaLogViewer.lang.psi;
 
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 public interface IdeaLogViewerTokenTypes {
   IElementType LOG_LEVEL_DEBUG = new IdeaLogElementType("DEBUG");
@@ -18,4 +19,6 @@ public interface IdeaLogViewerTokenTypes {
   IElementType UPTIME = new IdeaLogElementType("UPTIME");
 
   IElementType CODE_REFERENCE = new IdeaLogElementType("CODE_REFERENCE");
+
+  TokenSet LOG_LEVELS = TokenSet.create(LOG_LEVEL_DEBUG, LOG_LEVEL_INFO, LOG_LEVEL_WARN, LOG_LEVEL_ERROR);
 }
