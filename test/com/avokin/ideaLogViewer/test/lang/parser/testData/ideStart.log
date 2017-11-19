@@ -1,0 +1,16 @@
+2017-11-13 14:30:18,551 [      0]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE STARTED ------------------------------------------------------
+2017-11-13 14:30:18,570 [     19]   INFO -        #com.intellij.idea.Main - IDE: IntelliJ IDEA (build #IC-173.3531.6, 31 Oct 2017 12:16)
+2017-11-13 14:30:18,570 [     19]   INFO -        #com.intellij.idea.Main - OS: Mac OS X (10.12, x86_64)
+2017-11-13 14:30:18,571 [     20]   INFO -        #com.intellij.idea.Main - JRE: 1.8.0_111-b14 (Oracle Corporation)
+2017-11-13 14:30:18,571 [     20]   INFO -        #com.intellij.idea.Main - JVM: 25.111-b14 (Java HotSpot(TM) 64-Bit Server VM)
+2017-11-13 14:30:18,577 [     26]   INFO -        #com.intellij.idea.Main - JVM Args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:50974,suspend=y,server=n -Xmx512m -Xms256m -XX:MaxPermSize=250m -ea -Xbootclasspath/a:/Applications/IntelliJ IDEA 2017.3 CE EAP.app/Contents/lib/boot.jar -Didea.config.path=/Users/avokin/Library/Caches/IdeaIC2017.3/plugins-sandbox/config -Didea.system.path=/Users/avokin/Library/Caches/IdeaIC2017.3/plugins-sandbox/system -Didea.plugins.path=/Users/avokin/Library/Caches/IdeaIC2017.3/plugins-sandbox/plugins -Didea.classpath.index.enabled=false -Didea.required.plugins.id=IdeaLogViewer -Didea.smooth.progress=false -Dapple.laf.useScreenMenuBar=true -Dapple.awt.fileDialogForDirectories=true -Didea.platform.prefix=Idea -javaagent:/Users/avokin/Library/Caches/IdeaIC2017.3/captureAgent/debugger-agent.jar=/private/var/folders/_q/fb23jc854454yfvhhygdygp80000gp/T/capture.props -Dfile.encoding=UTF-8
+2017-11-13 14:30:18,577 [     26]   INFO -        #com.intellij.idea.Main - ext: /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre/lib/ext: [cldrdata.jar, dnsns.jar, jaccess.jar, jfxrt.jar, localedata.jar, meta-index, nashorn.jar, sunec.jar, sunjce_provider.jar, sunpkcs11.jar, zipfs.jar]
+2017-11-13 14:30:18,578 [     27]   INFO -        #com.intellij.idea.Main - ext: /System/Library/Java/Extensions: [AppleScriptEngine.jar, dns_sd.jar, j3daudio.jar, j3dcore.jar, j3dutils.jar, jai_codec.jar, jai_core.jar, libAppleScriptEngine.jnilib, libJ3D.jnilib, libJ3DAudio.jnilib, libJ3DUtils.jnilib, libmlib_jai.jnilib, mlibwrapper_jai.jar, MRJToolkit.jar, vecmath.jar]
+2017-11-13 14:30:18,578 [     27]   INFO -        #com.intellij.idea.Main - ext: /usr/lib/java: [libjdns_sd.jnilib]
+2017-11-13 14:30:18,578 [     27]   INFO -        #com.intellij.idea.Main - JNU charset: UTF-8
+2017-11-13 14:30:18,639 [     88]   INFO -        #com.intellij.idea.Main - JNA library (64-bit) loaded in 60 ms
+2017-11-13 14:30:18,753 [    202]   INFO -        #com.intellij.idea.Main - initializing environment
+2017-11-13 14:30:18,757 [    206]   INFO - .intellij.util.EnvironmentUtil - loading shell env: /bin/bash -l -i -c '/Applications/IntelliJ IDEA 2017.3 CE EAP.app/Contents/bin/printenv.py' '/private/var/folders/_q/fb23jc854454yfvhhygdygp80000gp/T/intellij-shell-env.tmp'
+2017-11-13 14:30:19,840 [   1289]   INFO - llij.ide.plugins.PluginManager - Cannot find optional descriptor duplicates-groovy.xml
+2017-11-13 14:30:20,231 [   1680]   INFO - .intellij.util.EnvironmentUtil - shell environment loaded (37 vars)
+2017-11-13 14:33:33,278 [ 194727]   INFO - llij.ide.plugins.PluginManager - Cannot find optional descriptor duplicates-groovy.xml

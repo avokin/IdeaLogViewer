@@ -1,4 +1,4 @@
-package com.avokin.ideaLogViewer.test.lang;
+package com.avokin.ideaLogViewer.test.lang.lexer;
 
 import com.avokin.ideaLogViewer.lang.lexer.IdeaLogLexer;
 import com.avokin.ideaLogViewer.test.IdeaLogViewerTestUtil;
@@ -6,8 +6,12 @@ import com.intellij.lexer.Lexer;
 import com.intellij.testFramework.LexerTestCase;
 import org.jetbrains.annotations.NotNull;
 
-public class IdeaLogViewerTest extends LexerTestCase {
+public class IdeaLogLexerTest extends LexerTestCase {
   public void testGeneral() {
+    doFileTest();
+  }
+
+  public void testIdeStart() {
     doFileTest();
   }
 
@@ -18,7 +22,7 @@ public class IdeaLogViewerTest extends LexerTestCase {
 
   @Override
   protected String getDirPath() {
-    return "lang/testData/";
+    return "lang/lexer/testData/";
   }
 
   @NotNull

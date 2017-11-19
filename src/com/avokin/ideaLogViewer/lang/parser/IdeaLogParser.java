@@ -11,7 +11,7 @@ import static com.avokin.ideaLogViewer.lang.psi.IdeaLogElementTypes.*;
 import static com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes.*;
 
 public class IdeaLogParser implements PsiParser {
-    private static final String IDE_STARTED_MESSAGE = "------------------------------------------------------ IDE STARTED ------------------------------------------------------";
+    private static final String IDE_STARTED_MESSAGE = "------------------------------------------------------ IDE STARTED ------------------------------------------------------ ";
     private static final String LOADED_PLUGINS_PREFIX = "Loaded bundled plugins:";
 
     @NotNull
