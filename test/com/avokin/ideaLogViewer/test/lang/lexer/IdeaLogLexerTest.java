@@ -11,10 +11,6 @@ public class IdeaLogLexerTest extends LexerTestCase {
     doFileTest();
   }
 
-  public void testIdeStart() {
-    doFileTest();
-  }
-
   @Override
   protected Lexer createLexer() {
     return new IdeaLogLexer();

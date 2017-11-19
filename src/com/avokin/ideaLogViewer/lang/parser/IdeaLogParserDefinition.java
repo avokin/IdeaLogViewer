@@ -58,6 +58,9 @@ public class IdeaLogParserDefinition implements ParserDefinition {
     if (node.getElementType() == IdeaLogElementTypes.CODE_REFERENCE_ELEMENT) {
       return new IdeaLogStackTraceElement(node);
     }
+    if (node.getElementType() == IdeaLogElementTypes.LAUNCH) {
+      return new IdeaLogLaunch(node);
+    }
     return new ASTWrapperPsiElement(node);
   }
 

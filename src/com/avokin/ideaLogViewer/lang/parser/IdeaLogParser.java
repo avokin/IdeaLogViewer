@@ -1,6 +1,5 @@
 package com.avokin.ideaLogViewer.lang.parser;
 
-import com.avokin.ideaLogViewer.lang.psi.IdeaLogViewerTokenTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -19,20 +18,31 @@ public class IdeaLogParser implements PsiParser {
     public ASTNode parse(@NotNull IElementType root, @NotNull PsiBuilder builder) {
         PsiBuilder.Marker markerWrapper = builder.mark();
         PsiBuilder.Marker marker = builder.mark();
+        PsiBuilder.Marker currentLaunch = builder.mark();
         while (builder.getTokenType() != null) {
             if (builder.getTokenType() == TIME_STAMP) {
-                parseLogRecord(builder);
+                if (parseLogRecord(builder, true)) {
+                    if (builder.getCurrentOffset() == 0) {
+                        currentLaunch.drop();
+                    } else {
+                        currentLaunch.done(LAUNCH);
+                    }
+                    currentLaunch = builder.mark();
+                    parseLogRecord(builder, false);
+                }
             } else {
                 builder.advanceLexer();
             }
-
         }
+        currentLaunch.done(LAUNCH);
         marker.done(root);
         markerWrapper.done(root);
         return builder.getTreeBuilt();
     }
 
-    private static void parseLogRecord(@NotNull PsiBuilder builder) {
+    private static boolean parseLogRecord(@NotNull PsiBuilder builder, boolean exitIfNewLaunch) {
+        PsiBuilder.Marker marker = builder.mark();
+
         IElementType recordElementType = LOG_RECORD;
         PsiBuilder.Marker logRecordMarker = builder.mark();
         builder.advanceLexer();
@@ -40,6 +50,10 @@ public class IdeaLogParser implements PsiParser {
             String tokenText = builder.getTokenText();
             if (builder.getTokenType() == MESSAGE && tokenText != null) {
                 if (IDE_STARTED_MESSAGE.equals(tokenText)) {
+                    if (exitIfNewLaunch) {
+                        marker.rollbackTo();
+                        return true;
+                    }
                     recordElementType = IDE_STARTED_RECORD;
                 }
                 if (tokenText.startsWith(LOADED_PLUGINS_PREFIX)) {
@@ -55,5 +69,7 @@ public class IdeaLogParser implements PsiParser {
             }
         }
         logRecordMarker.done(recordElementType);
+        marker.drop();
+        return false;
     }
 }

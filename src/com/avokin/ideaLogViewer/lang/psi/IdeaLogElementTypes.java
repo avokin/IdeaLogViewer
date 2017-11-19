@@ -11,4 +11,5 @@ public interface IdeaLogElementTypes {
     IElementType IDE_STARTED_RECORD = new IElementType("IDE_STARTED_RECORD", IdeaLogLanguage.INSTANCE);
     IElementType LOADED_PLUGINS_RECORD = new IElementType("LOADED_PLUGINS_RECORD", IdeaLogLanguage.INSTANCE);
     IElementType CODE_REFERENCE_ELEMENT = new IElementType("CODE_REFERENCE_ELEMENT", IdeaLogLanguage.INSTANCE);
+    IElementType LAUNCH = new IElementType("LAUNCH", IdeaLogLanguage.INSTANCE);
 }
