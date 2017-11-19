@@ -1,6 +1,7 @@
 package com.avokin.ideaLogViewer.structureView;
 
 import com.avokin.ideaLogViewer.IdeaLogItemPresentation;
+import com.avokin.ideaLogViewer.IdeaLogStringUtil;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogFileType;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogIdeStartedRecord;
 import com.avokin.ideaLogViewer.lang.psi.IdeaLogLoadedPluginsRecord;
@@ -11,7 +12,6 @@ import com.intellij.ide.structureView.TextEditorBasedStructureViewModel;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +58,7 @@ public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel
                 List<TreeElement> result = new ArrayList<>();
                 for (PsiElement logRecord: myIdeaLogFile.getFirstChild().getChildren()) {
                     if (logRecord instanceof IdeaLogIdeStartedRecord) {
-                      String presentableText = "IDE Started: " + StringUtil.shortenTextWithEllipsis(logRecord.getText(), 30, 0);
+                      String presentableText = "IDE Started: " + IdeaLogStringUtil.shorten(logRecord.getText(), 22);
                       result.add(new IdeaLogStructureViewElement((IdeaLogRecord) logRecord, presentableText));
                     }
                     if (logRecord instanceof IdeaLogLoadedPluginsRecord) {
