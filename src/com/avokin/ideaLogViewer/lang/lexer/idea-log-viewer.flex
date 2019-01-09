@@ -64,7 +64,7 @@ WHITE_SPACE      = ([ \f\n\r\t\u000b​\u00a0\u1680​\u180e\u2000-\u200a​\u20
 TIME_STAMP       = (\d{4}-\d{1,2}-\d{1,2}[ ]\d{1,2}:\d{1,2}:\d{1,2},\d{3})
 UPTIME           = [ \t]*\d+
 STACK_TRACE_PREFIX = [ \t]"at"[ \t]
-STACK_TRACE_ELEMENT = [a-zA-Z0-9_.$]+\((([a-zA-Z0-9_.]+:\d+)|(Native Method))\)
+STACK_TRACE_ELEMENT = [a-zA-Z0-9_.$<>]+\((([a-zA-Z0-9_.]+:\d+)|(Unknown[ ]Source)|(Native[ ]Method))\)
 STACK_TRACE_LINE = {STACK_TRACE_PREFIX}{STACK_TRACE_ELEMENT}{EOL}
 
 %state YY_CLASS_NAME, YY_AFTER_CLASS_NAME, YY_LOG_RECORD, YY_UPTIME, YY_TEXT_UNTIL_END_OF_LINE, YY_STACK_TRACE_LINE

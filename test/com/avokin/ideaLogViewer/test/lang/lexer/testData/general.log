@@ -75,3 +75,18 @@ Caused by: java.lang.IllegalStateException: Unexpected termination offset for le
 	at com.intellij.openapi.editor.ex.util.LexerEditorHighlighter.setText(LexerEditorHighlighter.java:360)
 	at com.intellij.openapi.editor.ex.util.LexerEditorHighlighter.documentChanged(LexerEditorHighlighter.java:167)
 	... 63 more
+2019-01-09 10:17:27,167 [ 424848]   WARN - n.process.BaseOSProcessHandler - Process hasn't generated any output for a long time.
+If it's a long-running mostly idle daemon process, consider overriding OSProcessHandler#readerOptions with 'BaseOutputReader.Options.forMostlySilentProcess()' to reduce CPU usage.
+Command line: /Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/bin/java -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:56989,suspend=y,server=n -Xmx512m -Xms256m -ea -Didea.config.path=/Users/user/Library/Caches/IdeaIC2018.3/plugins-sandbox/config -Didea.system.path=/Users/user/Library/Caches/IdeaIC2018.3/plugins-sandbox/system -Didea.plugins.path=/Users/user/Library/Caches/IdeaIC2018.3/plugins-sandbox/plugins -Didea.classpath.index.enabled=false -Didea.required.plugins.id=IdeaLogViewer -Didea.smooth.progress=false -Dapple.laf.useScreenMenuBar=true -Dapple.awt.fileDialogForDirectories=true -Didea.platform.prefix=Idea -javaagent:/Users/user/Library/Caches/IdeaIC2018.3/captureAgent/debugger-agent.jar=file:/private/var/folders/5f/c84c6qvs6ln70c6ndh5kwqhr0000gp/T/capture.props -Dfile.encoding=UTF-8 -classpath "/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/lib/tools.jar:/Applications/IntelliJ IDEA CE.app/Contents/lib/log4j.jar:/Applications/IntelliJ IDEA CE.a ...
+java.lang.Throwable: Process creation:
+	at com.intellij.execution.process.BaseOSProcessHandler.<init>(BaseOSProcessHandler.java:34)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:89)
+	at com.intellij.execution.process.OSProcessHandler.<init>(OSProcessHandler.java:44)
+	at com.intellij.execution.process.KillableProcessHandler.<init>(KillableProcessHandler.java:48)
+	at com.intellij.execution.process.ColoredProcessHandler.<init>(ColoredProcessHandler.java:38)
+2019-01-09 10:26:17,695 [ 955376]  ERROR - api.util.objectTree.ObjectNode - org.jetbrains.concurrency.AsyncPromise cannot be cast to java.lang.Boolean
+java.lang.ClassCastException: org.jetbrains.concurrency.AsyncPromise cannot be cast to java.lang.Boolean
+	at com.sun.proxy.$Proxy118.equals(Unknown Source)
+2019-01-09 10:26:17,695 [ 955376]  ERROR - api.util.objectTree.ObjectNode - org.jetbrains.concurrency.AsyncPromise cannot be cast to java.lang.Boolean
+
+
