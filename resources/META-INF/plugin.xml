@@ -13,6 +13,7 @@
         <fileTypeFactory implementation="com.avokin.ideaLogViewer.lang.psi.IdeaLogFileTypeFactory"/>
         <syntaxHighlighter key="IDEA log" implementationClass="com.avokin.ideaLogViewer.IdeaLogSyntaxHighlighter"/>
         <lang.foldingBuilder language="IDEA log" implementationClass="com.avokin.ideaLogViewer.test.editor.IdeaLogFoldingBuilder"/>
+      <annotator language="IDEA log" implementationClass="com.avokin.ideaLogViewer.IdeaLogAnnotator"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij.lang">
