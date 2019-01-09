@@ -2,9 +2,10 @@
     <id>IdeaLogViewer</id>
     <name>Viewer for idea.log files</name>
     <description>
-        Highlighting and Structure View for idea.log files
+        Highlighting and Structure View for idea.log files.
+        Short key alt + shift + L to open idea.log file
     </description>
-    <version>0.1</version>
+    <version>1</version>
     <vendor>Andrey Vokin</vendor>
     <category>Log</category>
     <idea-version since-build="173.0"/>
