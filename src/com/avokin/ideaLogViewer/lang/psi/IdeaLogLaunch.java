@@ -16,6 +16,6 @@ public class IdeaLogLaunch extends ASTWrapperPsiElement {
     @Nullable
     @Override
     public Icon getIcon(int flags) {
-        return AllIcons.General.Run;
+        return AllIcons.RunConfigurations.TestState.Run;
     }
 }

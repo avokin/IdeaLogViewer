@@ -22,6 +22,7 @@ public class IdeaLogParserDefinition implements ParserDefinition {
     return new IdeaLogLexer();
   }
 
+  @Override
   public PsiParser createParser(Project project) {
     return new IdeaLogParser();
   }
@@ -67,10 +68,5 @@ public class IdeaLogParserDefinition implements ParserDefinition {
   @Override
   public PsiFile createFile(FileViewProvider viewProvider) {
     return new IdeaLogFile(viewProvider);
-  }
-
-  @Override
-  public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
-    return SpaceRequirements.MAY;
   }
 }

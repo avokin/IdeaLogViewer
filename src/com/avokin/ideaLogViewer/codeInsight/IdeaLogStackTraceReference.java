@@ -5,22 +5,25 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.LineTokenizer;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class IdeaLogStackTraceReference implements PsiReference {
-  private IdeaLogStackTraceElement myElement;
+  private final IdeaLogStackTraceElement myElement;
 
   public IdeaLogStackTraceReference(IdeaLogStackTraceElement element) {
     myElement = element;
   }
 
+  @NotNull
   @Override
   public PsiElement getElement() {
     return myElement;
   }
 
+  @NotNull
   @Override
   public TextRange getRangeInElement() {
     int start = myElement.getText().indexOf('(');
@@ -71,7 +74,7 @@ public class IdeaLogStackTraceReference implements PsiReference {
   }
 
   @Override
-  public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
+  public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     return null;
   }
 
@@ -81,14 +84,14 @@ public class IdeaLogStackTraceReference implements PsiReference {
   }
 
   @Override
-  public boolean isReferenceTo(PsiElement element) {
+  public boolean isReferenceTo(@NotNull PsiElement element) {
     return resolve() == element;
   }
 
   @NotNull
   @Override
   public Object[] getVariants() {
-    return new Object[0];
+    return ArrayUtil.EMPTY_OBJECT_ARRAY;
   }
 
   @Override

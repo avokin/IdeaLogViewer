@@ -38,7 +38,7 @@ public class IdeaLogParserTest extends LightPlatformCodeInsightTestCase {
         Assert.assertEquals(expected, actual);
     }
 
-    private String loadFile(File testFile) throws IOException {
+    private static String loadFile(File testFile) throws IOException {
         return FileUtil.loadFile(testFile, CharsetToolkit.UTF8_CHARSET);
     }
 }

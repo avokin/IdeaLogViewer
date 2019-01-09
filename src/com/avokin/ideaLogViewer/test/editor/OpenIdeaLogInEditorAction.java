@@ -10,12 +10,13 @@ import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.VfsTestUtil;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-public class OpenIdeaLogInEditor extends AnAction implements DumbAware {
+public class OpenIdeaLogInEditorAction extends AnAction implements DumbAware {
     @Override
-    public void actionPerformed(AnActionEvent e) {
+    public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
         if (project == null) {
             return;
@@ -34,7 +35,7 @@ public class OpenIdeaLogInEditor extends AnAction implements DumbAware {
     }
 
     @Override
-    public void update(AnActionEvent e) {
+    public void update(@NotNull AnActionEvent e) {
         Project project = e.getProject();
         Presentation presentation = e.getPresentation();
         presentation.setVisible(project != null);

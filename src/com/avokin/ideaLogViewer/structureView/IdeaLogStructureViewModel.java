@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel implements StructureViewModel.ElementInfoProvider {
-    private PsiFile myIdeaLogFile;
+    private final PsiFile myIdeaLogFile;
 
     IdeaLogStructureViewModel(Editor editor, PsiFile file) {
         super(editor, file);
@@ -56,10 +56,10 @@ public class IdeaLogStructureViewModel extends TextEditorBasedStructureViewModel
                 for (PsiElement element: myIdeaLogFile.getFirstChild().getChildren()) {
                     if (element instanceof IdeaLogLaunch) {
                         String presentableText = "Launch: " + IdeaLogStringUtil.shorten(element.getText(), 22);
-                        result.add(new IdeaLogStructureViewElement((IdeaLogLaunch) element, presentableText));
+                        result.add(new IdeaLogStructureViewElement(element, presentableText));
                     }
                 }
-                return result.toArray(new TreeElement[result.size()]);
+                return result.toArray(TreeElement.EMPTY_ARRAY);
             }
 
             @Override

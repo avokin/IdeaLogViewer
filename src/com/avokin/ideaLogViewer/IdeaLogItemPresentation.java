@@ -7,8 +7,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class IdeaLogItemPresentation implements ItemPresentation {
-  private String myText;
-  private Icon myIcon;
+  private final String myText;
+  private final Icon myIcon;
 
   public IdeaLogItemPresentation(@NotNull String text, @Nullable Icon icon) {
     myText = text;

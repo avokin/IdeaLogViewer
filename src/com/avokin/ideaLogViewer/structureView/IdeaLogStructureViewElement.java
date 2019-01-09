@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IdeaLogStructureViewElement implements StructureViewTreeElement {
-    private PsiElement myElement;
-    private String myPresentableText;
+    private final PsiElement myElement;
+    private final String myPresentableText;
 
     IdeaLogStructureViewElement(@NotNull PsiElement ideaLogRecord, @NotNull String text) {
         myElement = ideaLogRecord;
@@ -44,7 +44,7 @@ public class IdeaLogStructureViewElement implements StructureViewTreeElement {
                     result.add(new IdeaLogStructureViewElement(element, presentableText));
                 }
             }
-            return result.toArray(new TreeElement[result.size()]);
+            return result.toArray(TreeElement.EMPTY_ARRAY);
         }
         return TreeElement.EMPTY_ARRAY;
     }
