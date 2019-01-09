@@ -1,0 +1,27 @@
+2019-01-09 09:52:01,747 [35178073]  ERROR - plication.TransactionGuardImpl - Write-unsafe context! Model changes are allowed from write-safe contexts only. Please ensure you're using invokeLater/invokeAndWait with a correct modality state (not "any"). See TransactionGuard documentation for details.
+  current modality=ModalityState.NON_MODAL
+  known modalities:
+    ModalityState.NON_MODAL, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{[javax.swing.JDialog[dialog22,1775,-548,410x148,invalid,hidden,layout=java.awt.BorderLayout,APPLICATION_MODAL,title=This should not be shown,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,0,410x148,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777697,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]]}, writingAllowed=false;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{[com.intellij.openapi.ui.impl.DialogWrapperPeerImpl$MyDialog[dialog21,1508,-261,1012x696,invalid,hidden,layout=java.awt.BorderLayout,APPLICATION_MODAL,title=Preferences,defaultCloseOperation=DO_NOTHING_ON_CLOSE,rootPane=,rootPaneCheckingEnabled=true]]}, writingAllowed=true
+java.lang.Throwable: Write-unsafe context! Model changes are allowed from write-safe contexts only. Please ensure you're using invokeLater/invokeAndWait with a correct modality state (not "any"). See TransactionGuard documentation for details.
+  current modality=ModalityState.NON_MODAL
+  known modalities:
+    ModalityState.NON_MODAL, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{[javax.swing.JDialog[dialog22,1775,-548,410x148,invalid,hidden,layout=java.awt.BorderLayout,APPLICATION_MODAL,title=This should not be shown,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,0,410x148,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777697,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]]}, writingAllowed=false;
+    ModalityState:{}, writingAllowed=true;
+    ModalityState:{[com.intellij.openapi.ui.impl.DialogWrapperPeerImpl$MyDialog[dialog21,1508,-261,1012x696,invalid,hidden,layout=java.awt.BorderLayout,APPLICATION_MODAL,title=Preferences,defaultCloseOperation=DO_NOTHING_ON_CLOSE,rootPane=,rootPaneCheckingEnabled=true]]}, writingAllowed=true
+	at com.intellij.openapi.diagnostic.Logger.error(Logger.java:134)
+	at com.intellij.openapi.application.TransactionGuardImpl.assertWriteActionAllowed(TransactionGuardImpl.java:232)
+	at com.intellij.openapi.fileEditor.impl.EditorWindow.lambda$closeFile$1(EditorWindow.java:279)
+	at com.intellij.openapi.fileEditor.impl.FileEditorManagerImpl.runChange(FileEditorManagerImpl.java:1660)
+	at com.intellij.openapi.fileEditor.impl.EditorWindow.closeFile(EditorWindow.java:214)
